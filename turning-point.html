@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Turning Point</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0805;
+    --parchment: #f5f0e8;
+    --amber: #c8860a;
+    --amber-bright: #e8a020;
+    --amber-dim: #6b4a0a;
+    --cream: #e8dfc8;
+    --muted: #4a3f2f;
+    --grain-opacity: 0.04;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Crimson Text', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Film grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    z-index: 1000;
+    animation: grain 0.5s steps(1) infinite;
+  }
+
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -3%); }
+    20% { transform: translate(3%, 2%); }
+    30% { transform: translate(-1%, 4%); }
+    40% { transform: translate(2%, -1%); }
+    50% { transform: translate(-3%, 1%); }
+    60% { transform: translate(1%, -2%); }
+    70% { transform: translate(-2%, 3%); }
+    80% { transform: translate(3%, -3%); }
+    90% { transform: translate(-1%, 2%); }
+  }
+
+  /* Amber projector glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 50%;
+    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 60px 0 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(200, 134, 10, 0.2);
+    margin-bottom: 60px;
+  }
+
+  .brand-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--parchment);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .main-title em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .tagline {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(232, 223, 200, 0.6);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── API KEY SETUP ── */
+  .setup-section {
+    background: rgba(200, 134, 10, 0.06);
+    border: 1px solid rgba(200, 134, 10, 0.25);
+    border-radius: 2px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .setup-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .setup-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--parchment);
+    margin-bottom: 8px;
+  }
+
+  .setup-desc {
+    font-size: 15px;
+    color: rgba(232, 223, 200, 0.55);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .setup-desc a {
+    color: var(--amber);
+    text-decoration: none;
+  }
+
+  .key-input-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .key-input {
+    flex: 1;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(200, 134, 10, 0.3);
+    color: var(--cream);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    padding: 12px 16px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .key-input:focus {
+    border-color: var(--amber);
+  }
+
+  .key-input::placeholder {
+    color: rgba(232, 223, 200, 0.25);
+  }
+
+  .key-save-btn {
+    background: var(--amber);
+    color: var(--ink);
+    border: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .key-save-btn:hover { background: var(--amber-bright); }
+
+  .key-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .key-status.success {
+    display: block;
+    background: rgba(100, 180, 100, 0.1);
+    border: 1px solid rgba(100, 180, 100, 0.3);
+    color: #90d090;
+  }
+
+  .key-status.error {
+    display: block;
+    background: rgba(180, 80, 80, 0.1);
+    border: 1px solid rgba(180, 80, 80, 0.3);
+    color: #d09090;
+  }
+
+  /* ── JOURNAL INPUT ── */
+  .journal-section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .scene-counter {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .date-stamp {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(232, 223, 200, 0.3);
+    letter-spacing: 0.1em;
+    margin-left: auto;
+  }
+
+  .journal-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    border-top: 2px solid rgba(200, 134, 10, 0.4);
+    color: var(--cream);
+    font-family: 'Crimson Text', serif;
+    font-size: 20px;
+    line-height: 1.7;
+    padding: 28px 32px;
+    border-radius: 0 0 2px 2px;
+    resize: none;
+    outline: none;
+    min-height: 180px;
+    transition: border-color 0.3s;
+  }
+
+  .journal-textarea:focus {
+    border-color: rgba(200, 134, 10, 0.5);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .journal-textarea::placeholder {
+    color: rgba(232, 223, 200, 0.2);
+    font-style: italic;
+  }
+
+  .journal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  .char-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(232, 223, 200, 0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .roll-btn {
+    background: transparent;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .roll-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+
+  .roll-btn:hover {
+    color: var(--ink);
+  }
+
+  .roll-btn:hover::before {
+    transform: scaleX(1);
+  }
+
+  .roll-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .roll-btn:disabled::before { transform: scaleX(0); }
+  .roll-btn:disabled { color: var(--amber); }
+
+  /* ── LOADING ── */
+  .loading-state {
+    display: none;
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .loading-state.visible { display: block; }
+
+  .film-reel {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 2px solid rgba(200, 134, 10, 0.2);
+    border-top-color: var(--amber);
+    border-radius: 50%;
+    animation: reel 1s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes reel {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    text-transform: uppercase;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── SCENE CARD ── */
+  .scene-card {
+    display: none;
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    border-top: 2px solid var(--amber);
+    padding: 40px 40px 36px;
+    margin-bottom: 60px;
+    position: relative;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .scene-card.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scene-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200, 134, 10, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .scene-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .scene-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .scene-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(232, 223, 200, 0.3);
+    letter-spacing: 0.1em;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--parchment);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .story-beat {
+    font-family: 'Crimson Text', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(232, 223, 200, 0.75);
+    margin-bottom: 32px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(200, 134, 10, 0.3);
+  }
+
+  .note-block {
+    margin-bottom: 24px;
+  }
+
+  .note-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: rgba(200, 134, 10, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .note-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(232, 223, 200, 0.6);
+  }
+
+  .opportunity-block {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(200, 134, 10, 0.15);
+  }
+
+  .opportunity-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: rgba(200, 134, 10, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .opportunity-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--amber-bright);
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* ── VOICEOVER BUTTON ── */
+  .voice-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.3);
+    color: rgba(200, 134, 10, 0.7);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    padding: 10px 18px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    margin-top: 20px;
+    border-radius: 2px;
+  }
+
+  .voice-btn:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .voice-btn.playing {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(200, 134, 10, 0.05);
+  }
+
+  .voice-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: none;
+  }
+
+  .voice-btn.playing .voice-dot {
+    animation: blink 0.8s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* ── REFLECTION BLOCK ── */
+  .reflection-block {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(200, 134, 10, 0.12);
+  }
+
+  .reflection-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: rgba(200, 134, 10, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .reflection-sublabel {
+    font-family: 'Crimson Text', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(232, 223, 200, 0.3);
+    margin-bottom: 12px;
+  }
+
+  .reflection-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid rgba(200, 134, 10, 0.12);
+    color: rgba(232, 223, 200, 0.7);
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.65;
+    padding: 16px 20px;
+    border-radius: 2px;
+    resize: none;
+    outline: none;
+    min-height: 100px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .reflection-textarea:focus {
+    border-color: rgba(200, 134, 10, 0.3);
+    background: rgba(255,255,255,0.025);
+  }
+
+  .reflection-textarea::placeholder {
+    color: rgba(232, 223, 200, 0.15);
+    font-style: italic;
+  }
+
+  .reflection-save-btn {
+    background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    color: rgba(200, 134, 10, 0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 10px;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+
+  .reflection-save-btn:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .reflection-saved {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(100, 180, 100, 0.6);
+    margin-top: 8px;
+    display: none;
+  }
+
+  .reflection-saved.visible { display: block; }
+
+  .error-card {
+    display: none;
+    background: rgba(180, 80, 80, 0.08);
+    border: 1px solid rgba(180, 80, 80, 0.25);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    border-radius: 2px;
+  }
+
+  .error-card.visible { display: block; }
+
+  .error-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #d09090;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .error-msg {
+    font-size: 15px;
+    color: rgba(208, 144, 144, 0.7);
+    line-height: 1.5;
+  }
+
+  /* ── THE REEL ── */
+  .reel-section {
+    padding: 40px 0 80px;
+    border-top: 1px solid rgba(200, 134, 10, 0.15);
+  }
+
+  .reel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .reel-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: rgba(200, 134, 10, 0.5);
+    text-transform: uppercase;
+  }
+
+  .reel-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(232, 223, 200, 0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .reel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .reel-card {
+    border: 1px solid rgba(200, 134, 10, 0.15);
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .reel-card:hover {
+    border-color: rgba(200, 134, 10, 0.4);
+    background: rgba(200, 134, 10, 0.04);
+  }
+
+  .reel-card.active {
+    border-color: var(--amber);
+    background: rgba(200, 134, 10, 0.06);
+  }
+
+  .reel-scene-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .reel-scene-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--parchment);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .reel-scene-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(232, 223, 200, 0.25);
+  }
+
+  .empty-reel {
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(232, 223, 200, 0.2);
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 20px 0 40px;
+    border-top: 1px solid rgba(200, 134, 10, 0.1);
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(232, 223, 200, 0.15);
+    text-transform: uppercase;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: rgba(200, 134, 10, 0.3); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="brand-label">A cinematic journal</div>
+    <h1 class="main-title">The Turning<br><em>Point</em></h1>
+    <p class="tagline">Your life is not a series of accidents. Write today's scene — the AI will find the story you missed.</p>
+  </header>
+
+  <!-- API KEY SETUP -->
+  <div class="setup-section" id="setup-section">
+    <div class="setup-label">First — Your API Key</div>
+    <div class="setup-title">Connect the reframing engine</div>
+    <p class="setup-desc">
+      Paste your Anthropic API key below. It stays in your browser only — nothing is sent anywhere except directly to Anthropic when you submit an entry. Get one free at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+    </p>
+    <div class="key-input-row">
+      <input type="password" class="key-input" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
+      <button class="key-save-btn" onclick="saveKey()">Save Key</button>
+    </div>
+    <div class="key-status" id="key-status"></div>
+  </div>
+
+  <!-- JOURNAL INPUT -->
+  <div class="journal-section">
+    <div class="section-header">
+      <span class="scene-counter" id="next-scene-label">Scene 001</span>
+      <span class="date-stamp" id="today-date"></span>
+    </div>
+    <textarea
+      class="journal-textarea"
+      id="journal-input"
+      placeholder="What happened today? Write it raw. The AI will find the story inside..."
+      maxlength="2000"
+      oninput="updateCharCount()"
+    ></textarea>
+    <div class="journal-footer">
+      <span class="char-count" id="char-count">0 / 2000</span>
+      <button class="roll-btn" id="roll-btn" onclick="rollCamera()">
+        ▶ &nbsp; Roll Camera
+      </button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-state" id="loading">
+    <div class="film-reel"></div>
+    <div class="loading-text">Finding your story...</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-card" id="error-card">
+    <div class="error-title">Scene Failed to Render</div>
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <!-- SCENE CARD -->
+  <div class="scene-card" id="scene-card">
+    <div class="scene-meta">
+      <span class="scene-num" id="r-scene-num">Scene 001</span>
+      <span class="scene-date" id="r-date"></span>
+    </div>
+    <h2 class="chapter-title" id="r-chapter"></h2>
+    <p class="story-beat" id="r-beat"></p>
+    <div class="note-block">
+      <div class="note-label">Director's Note</div>
+      <p class="note-text" id="r-director"></p>
+    </div>
+    <div class="opportunity-block">
+      <div class="opportunity-label">Hidden Opportunity</div>
+      <p class="opportunity-text" id="r-opportunity"></p>
+    </div>
+
+    <!-- VOICEOVER -->
+    <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
+      <span class="voice-dot"></span>
+      <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
+    </button>
+
+    <!-- REFLECTION -->
+    <div class="reflection-block">
+      <div class="reflection-label">Your Reflection</div>
+      <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
+      <textarea
+        class="reflection-textarea"
+        id="reflection-input"
+        placeholder="Write back to your scene..."
+        rows="4"
+        oninput="onReflectionInput()"
+      ></textarea>
+      <button class="reflection-save-btn" id="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
+      <div class="reflection-saved" id="reflection-saved">✓ Saved to your reel</div>
+    </div>
+  </div>
+
+  <!-- THE REEL -->
+  <div class="reel-section">
+    <div class="reel-header">
+      <span class="reel-title">The Reel</span>
+      <span class="reel-count" id="reel-count">0 scenes</span>
+    </div>
+    <div class="reel-grid" id="reel-grid">
+      <div class="empty-reel">Your chapters will appear here as you document your turning point...</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>The Turning Point &nbsp;·&nbsp; Your story, reframed &nbsp;·&nbsp; © 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  // ── STATE ──
+  let entries = JSON.parse(localStorage.getItem('tp_entries') || '[]');
+  let apiKey = localStorage.getItem('tp_api_key') || '';
+
+  // ── INIT ──
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set date
+    const now = new Date();
+    document.getElementById('today-date').textContent = now.toLocaleDateString('en-AU', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    // Update scene counter
+    updateSceneLabel();
+
+    // If key exists, show it's connected
+    if (apiKey) {
+      showKeyStatus('success', '✓ API key connected — engine is live');
+      document.getElementById('api-key-input').value = '••••••••••••••••••••';
+    }
+
+    // Render reel
+    renderReel();
+  });
+
+  // ── API KEY ──
+  function saveKey() {
+    const input = document.getElementById('api-key-input').value.trim();
+    if (!input || input.includes('•')) {
+      showKeyStatus('error', 'Please enter a valid API key');
+      return;
+    }
+    if (!input.startsWith('sk-ant-')) {
+      showKeyStatus('error', 'Key should start with sk-ant- — double check you copied it fully');
+      return;
+    }
+    apiKey = input;
+    localStorage.setItem('tp_api_key', apiKey);
+    document.getElementById('api-key-input').value = '••••••••••••••••••••';
+    showKeyStatus('success', '✓ Key saved. The reframing engine is live.');
+  }
+
+  function showKeyStatus(type, msg) {
+    const el = document.getElementById('key-status');
+    el.className = 'key-status ' + type;
+    el.textContent = msg;
+  }
+
+  // ── CHAR COUNT ──
+  function updateCharCount() {
+    const val = document.getElementById('journal-input').value.length;
+    document.getElementById('char-count').textContent = val + ' / 2000';
+  }
+
+  function updateSceneLabel() {
+    const num = String(entries.length + 1).padStart(3, '0');
+    document.getElementById('next-scene-label').textContent = 'Scene ' + num;
+  }
+
+  // ── MAIN: ROLL CAMERA ──
+  async function rollCamera() {
+    const text = document.getElementById('journal-input').value.trim();
+
+    if (!text) {
+      alert('Write something first — even just a few sentences about your day.');
+      return;
+    }
+
+    if (!apiKey) {
+      alert('Paste your Anthropic API key above first to bring the engine to life.');
+      return;
+    }
+
+    // Hide previous results
+    document.getElementById('scene-card').classList.remove('visible');
+    document.getElementById('error-card').classList.remove('visible');
+    document.getElementById('loading').classList.add('visible');
+    document.getElementById('roll-btn').disabled = true;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 1024,
+          system: `You are the creative director of "The Turning Point" — a cinematic journaling experience that helps people see themselves as the protagonist of their own story, not a passive victim of circumstance.
+
+Someone has shared their day or a moment with you. Your job is to reframe it through four lenses, with warmth, depth, and cinematic honesty. Be specific to what they actually shared — not generic. Be honest, not falsely positive. If something was genuinely hard, acknowledge it — then find what it reveals or opens up.
+
+Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Just raw JSON:
+{
+  "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year She Stopped Asking Permission, Learning to Hold the Wheel",
+  "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat — the person is the protagonist. Specific, not generic.",
+  "directors_note": "Exactly 2-3 short punchy observations as separate sentences. First: what they did well. Second: one honest redirect or question. Third: a permission or encouragement. Each sentence stands alone. No flowing paragraphs.",
+  "opportunity": "1-2 grounded sentences. What is this moment opening up, even if it doesn't feel like it yet? Not a motivational poster — something true and specific."
+}`,
+          messages: [{ role: 'user', content: text }]
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error?.message || 'API call failed — status ' + response.status);
+      }
+
+      const data = await response.json();
+      const rawText = data.content[0].text.trim();
+
+      let result;
+      try {
+        result = JSON.parse(rawText);
+      } catch {
+        const match = rawText.match(/\{[\s\S]*\}/);
+        if (match) result = JSON.parse(match[0]);
+        else throw new Error('Could not parse the AI response. Try again.');
+      }
+
+      // Save entry
+      const entry = {
+        id: Date.now(),
+        sceneNum: entries.length + 1,
+        date: new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }),
+        inputText: text,
+        ...result
+      };
+      entries.unshift(entry);
+      localStorage.setItem('tp_entries', JSON.stringify(entries));
+
+      // Display
+      showScene(entry);
+      renderReel();
+
+      // Clear input
+      document.getElementById('journal-input').value = '';
+      updateCharCount();
+      updateSceneLabel();
+
+    } catch (err) {
+      document.getElementById('error-msg').textContent = err.message;
+      document.getElementById('error-card').classList.add('visible');
+    } finally {
+      document.getElementById('loading').classList.remove('visible');
+      document.getElementById('roll-btn').disabled = false;
+    }
+  }
+
+  // ── VOICEOVER ──
+  let speechSynth = window.speechSynthesis;
+  let isSpeaking = false;
+  let currentEntry = null;
+
+  function toggleVoice() {
+    if (isSpeaking) {
+      speechSynth.cancel();
+      setVoiceState(false);
+      return;
+    }
+    if (!currentEntry) return;
+
+    const script = [
+      currentEntry.chapter_title + '.',
+      currentEntry.story_beat,
+      "Director's note. " + currentEntry.directors_note,
+      "The hidden opportunity. " + currentEntry.opportunity
+    ].join(' ... ');
+
+    const utterance = new SpeechSynthesisUtterance(script);
+    utterance.rate = 0.88;
+    utterance.pitch = 0.95;
+    utterance.volume = 1;
+
+    // Try to find a warm voice
+    const voices = speechSynth.getVoices();
+    const preferred = voices.find(v =>
+      v.name.includes('Samantha') ||
+      v.name.includes('Karen') ||
+      v.name.includes('Moira') ||
+      v.name.includes('Female') ||
+      (v.lang === 'en-AU') ||
+      (v.lang === 'en-GB' && v.name.includes('Female'))
+    ) || voices.find(v => v.lang.startsWith('en'));
+
+    if (preferred) utterance.voice = preferred;
+
+    utterance.onstart = () => setVoiceState(true);
+    utterance.onend = () => setVoiceState(false);
+    utterance.onerror = () => setVoiceState(false);
+
+    speechSynth.speak(utterance);
+  }
+
+  function setVoiceState(playing) {
+    isSpeaking = playing;
+    const btn = document.getElementById('voice-btn');
+    const label = document.getElementById('voice-btn-label');
+    btn.classList.toggle('playing', playing);
+    label.textContent = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
+    label.innerHTML = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
+  }
+
+  // ── REFLECTION ──
+  let currentEntryId = null;
+
+  function onReflectionInput() {
+    document.getElementById('reflection-saved').classList.remove('visible');
+  }
+
+  function saveReflection() {
+    const text = document.getElementById('reflection-input').value.trim();
+    if (!text || !currentEntryId) return;
+
+    const idx = entries.findIndex(e => e.id === currentEntryId);
+    if (idx !== -1) {
+      entries[idx].reflection = text;
+      localStorage.setItem('tp_entries', JSON.stringify(entries));
+      document.getElementById('reflection-saved').classList.add('visible');
+    }
+  }
+
+  // ── DISPLAY SCENE ──
+  function showScene(entry) {
+    currentEntry = entry;
+    currentEntryId = entry.id;
+
+    // Stop any playing narration
+    if (isSpeaking) { speechSynth.cancel(); setVoiceState(false); }
+
+    const num = 'Scene ' + String(entry.sceneNum).padStart(3, '0');
+    document.getElementById('r-scene-num').textContent = num;
+    document.getElementById('r-date').textContent = entry.date;
+    document.getElementById('r-chapter').textContent = entry.chapter_title || '';
+    document.getElementById('r-beat').textContent = entry.story_beat || '';
+    document.getElementById('r-director').textContent = entry.directors_note || '';
+    document.getElementById('r-opportunity').textContent = entry.opportunity || '';
+
+    // Load saved reflection if exists
+    document.getElementById('reflection-input').value = entry.reflection || '';
+    document.getElementById('reflection-saved').classList.remove('visible');
+
+    document.getElementById('scene-card').classList.add('visible');
+
+    setTimeout(() => {
+      document.getElementById('scene-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  // ── RENDER REEL ──
+  function renderReel() {
+    const grid = document.getElementById('reel-grid');
+    const count = document.getElementById('reel-count');
+
+    if (entries.length === 0) {
+      grid.innerHTML = '<div class="empty-reel">Your chapters will appear here as you document your turning point...</div>';
+      count.textContent = '0 scenes';
+      return;
+    }
+
+    count.textContent = entries.length + (entries.length === 1 ? ' scene' : ' scenes');
+    grid.innerHTML = entries.map((e, i) => `
+      <div class="reel-card ${i === 0 ? 'active' : ''}" onclick="showScene(entries[${i}])">
+        <div class="reel-scene-num">Scene ${String(e.sceneNum).padStart(3,'0')}</div>
+        <div class="reel-scene-title">${e.chapter_title || 'Untitled Scene'}</div>
+        <div class="reel-scene-date">${e.date}</div>
+      </div>
+    `).join('');
+  }
+</script>
+</body>
+</html>
