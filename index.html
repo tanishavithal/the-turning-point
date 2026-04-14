@@ -28,43 +28,48 @@
     position: relative;
   }
 
-  /* Film grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    opacity: var(--grain-opacity);
-    pointer-events: none;
-    z-index: 1000;
-    animation: grain 0.5s steps(1) infinite;
-  }
-
-  @keyframes grain {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2%, -3%); }
-    20% { transform: translate(3%, 2%); }
-    30% { transform: translate(-1%, 4%); }
-    40% { transform: translate(2%, -1%); }
-    50% { transform: translate(-3%, 1%); }
-    60% { transform: translate(1%, -2%); }
-    70% { transform: translate(-2%, 3%); }
-    80% { transform: translate(3%, -3%); }
-    90% { transform: translate(-1%, 2%); }
-  }
-
-  /* Amber projector glow */
+  /* Breathing amber glow — warm, safe, no flicker */
   body::after {
     content: '';
     position: fixed;
     top: -20%;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
-    height: 50%;
-    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.06) 0%, transparent 70%);
+    width: 70%;
+    height: 55%;
+    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.09) 0%, transparent 70%);
     pointer-events: none;
     z-index: 1;
+    animation: ambientGlow 5s ease-in-out infinite;
+  }
+
+  @keyframes ambientGlow {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+
+  /* Film strip */
+  .film-strip-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: -40px -24px 40px;
+    overflow: hidden;
+  }
+
+  .film-strip-side {
+    flex-shrink: 0;
+    width: 32px;
+  }
+
+  .film-strip-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 40px 24px;
   }
 
   .container {
@@ -173,13 +178,8 @@
     transition: border-color 0.2s;
   }
 
-  .key-input:focus {
-    border-color: var(--amber);
-  }
-
-  .key-input::placeholder {
-    color: rgba(232, 223, 200, 0.25);
-  }
+  .key-input:focus { border-color: var(--amber); }
+  .key-input::placeholder { color: rgba(232, 223, 200, 0.25); }
 
   .key-save-btn {
     background: var(--amber);
@@ -222,9 +222,7 @@
   }
 
   /* ── JOURNAL INPUT ── */
-  .journal-section {
-    margin-bottom: 60px;
-  }
+  .journal-section { margin-bottom: 60px; }
 
   .section-header {
     display: flex;
@@ -316,21 +314,146 @@
     z-index: -1;
   }
 
-  .roll-btn:hover {
-    color: var(--ink);
-  }
-
-  .roll-btn:hover::before {
-    transform: scaleX(1);
-  }
-
-  .roll-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-
+  .roll-btn:hover { color: var(--ink); }
+  .roll-btn:hover::before { transform: scaleX(1); }
+  .roll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .roll-btn:disabled::before { transform: scaleX(0); }
   .roll-btn:disabled { color: var(--amber); }
+
+  /* ── CRISIS CARD ── */
+  .crisis-card {
+    display: none;
+    border: 1px solid rgba(200, 134, 10, 0.25);
+    border-top: 2px solid var(--amber);
+    padding: 48px 40px 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    animation: fadeUp 0.6s ease forwards;
+    position: relative;
+  }
+
+  .crisis-card.visible { display: block; }
+
+  .crisis-icon {
+    font-size: 28px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .crisis-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 16px;
+  }
+
+  .crisis-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(232, 223, 200, 0.65);
+    max-width: 500px;
+    margin: 0 auto 36px;
+  }
+
+  .crisis-resources {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .crisis-resource {
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 160px;
+  }
+
+  .crisis-resource-country {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: rgba(200, 134, 10, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .crisis-resource-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(232, 223, 200, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .crisis-resource-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--amber);
+  }
+
+  .crisis-resource-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+  }
+
+  .crisis-resource-link:hover { color: var(--amber-bright); }
+
+  .crisis-divider {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(232, 223, 200, 0.2);
+    margin-bottom: 28px;
+  }
+
+  .crisis-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .crisis-continue-btn {
+    background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.35);
+    color: rgba(232, 223, 200, 0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    padding: 12px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+
+  .crisis-continue-btn:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .crisis-stop-btn {
+    background: transparent;
+    border: none;
+    color: rgba(232, 223, 200, 0.25);
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-style: italic;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px;
+  }
+
+  .crisis-stop-btn:hover { color: rgba(232, 223, 200, 0.5); }
 
   /* ── LOADING ── */
   .loading-state {
@@ -352,9 +475,7 @@
     margin-bottom: 20px;
   }
 
-  @keyframes reel {
-    to { transform: rotate(360deg); }
-  }
+  @keyframes reel { to { transform: rotate(360deg); } }
 
   .loading-text {
     font-family: 'Space Mono', monospace;
@@ -439,9 +560,7 @@
     border-left: 2px solid rgba(200, 134, 10, 0.3);
   }
 
-  .note-block {
-    margin-bottom: 24px;
-  }
+  .note-block { margin-bottom: 24px; }
 
   .note-label {
     font-family: 'Space Mono', monospace;
@@ -449,15 +568,38 @@
     letter-spacing: 0.35em;
     color: rgba(200, 134, 10, 0.6);
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
-  .note-text {
+  /* ── DIRECTOR'S NOTE — 3 punchy lines ── */
+  .directors-note-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .directors-note-list li {
     font-family: 'Crimson Text', serif;
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.55;
     color: rgba(232, 223, 200, 0.6);
+    padding: 10px 0 10px 20px;
+    border-left: 1px solid rgba(200, 134, 10, 0.15);
+    margin-bottom: 8px;
+    position: relative;
   }
+
+  .directors-note-list li::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(200, 134, 10, 0.15);
+  }
+
+  .directors-note-list li:last-child { margin-bottom: 0; }
 
   .opportunity-block {
     margin-top: 32px;
@@ -502,10 +644,7 @@
     border-radius: 2px;
   }
 
-  .voice-btn:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-  }
+  .voice-btn:hover { border-color: var(--amber); color: var(--amber); }
 
   .voice-btn.playing {
     border-color: var(--amber);
@@ -518,7 +657,6 @@
     height: 6px;
     border-radius: 50%;
     background: var(--amber);
-    animation: none;
   }
 
   .voice-btn.playing .voice-dot {
@@ -596,10 +734,7 @@
     border-radius: 2px;
   }
 
-  .reflection-save-btn:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-  }
+  .reflection-save-btn:hover { border-color: var(--amber); color: var(--amber); }
 
   .reflection-saved {
     font-family: 'Space Mono', monospace;
@@ -632,11 +767,7 @@
     margin-bottom: 8px;
   }
 
-  .error-msg {
-    font-size: 15px;
-    color: rgba(208, 144, 144, 0.7);
-    line-height: 1.5;
-  }
+  .error-msg { font-size: 15px; color: rgba(208, 144, 144, 0.7); line-height: 1.5; }
 
   /* ── THE REEL ── */
   .reel-section {
@@ -746,10 +877,59 @@
 
 <div class="container">
 
-  <header>
-    <div class="brand-label">A cinematic journal</div>
-    <h1 class="main-title">The Turning<br><em>Point</em></h1>
-    <p class="tagline">Your life is not a series of accidents. Write today's scene — the AI will find the story you missed.</p>
+  <header style="padding: 0 0 40px; border-bottom: 1px solid rgba(200, 134, 10, 0.2); margin-bottom: 60px; overflow: hidden;">
+    <div class="film-strip-wrap">
+      <!-- Left strip -->
+      <svg class="film-strip-side" viewBox="0 0 32 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="300" fill="#1a1208"/>
+        <rect x="2" y="0" width="28" height="300" fill="#0f0c06"/>
+        <g fill="#0a0805">
+          <rect x="5" y="4" width="22" height="14" rx="1"/>
+          <rect x="5" y="24" width="22" height="14" rx="1"/>
+          <rect x="5" y="44" width="22" height="14" rx="1"/>
+          <rect x="5" y="64" width="22" height="14" rx="1"/>
+          <rect x="5" y="84" width="22" height="14" rx="1"/>
+          <rect x="5" y="104" width="22" height="14" rx="1"/>
+          <rect x="5" y="124" width="22" height="14" rx="1"/>
+          <rect x="5" y="144" width="22" height="14" rx="1"/>
+          <rect x="5" y="164" width="22" height="14" rx="1"/>
+          <rect x="5" y="184" width="22" height="14" rx="1"/>
+          <rect x="5" y="204" width="22" height="14" rx="1"/>
+          <rect x="5" y="224" width="22" height="14" rx="1"/>
+          <rect x="5" y="244" width="22" height="14" rx="1"/>
+          <rect x="5" y="264" width="22" height="14" rx="1"/>
+          <rect x="5" y="284" width="22" height="14" rx="1"/>
+        </g>
+      </svg>
+      <!-- Centre content -->
+      <div class="film-strip-center">
+        <div class="brand-label">A cinematic journal</div>
+        <h1 class="main-title">The Turning<br><em>Point</em></h1>
+        <p class="tagline">Your life is not a series of accidents. Write today's scene — the AI will find the story you missed.</p>
+      </div>
+      <!-- Right strip -->
+      <svg class="film-strip-side" viewBox="0 0 32 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="300" fill="#1a1208"/>
+        <rect x="2" y="0" width="28" height="300" fill="#0f0c06"/>
+        <g fill="#0a0805">
+          <rect x="5" y="4" width="22" height="14" rx="1"/>
+          <rect x="5" y="24" width="22" height="14" rx="1"/>
+          <rect x="5" y="44" width="22" height="14" rx="1"/>
+          <rect x="5" y="64" width="22" height="14" rx="1"/>
+          <rect x="5" y="84" width="22" height="14" rx="1"/>
+          <rect x="5" y="104" width="22" height="14" rx="1"/>
+          <rect x="5" y="124" width="22" height="14" rx="1"/>
+          <rect x="5" y="144" width="22" height="14" rx="1"/>
+          <rect x="5" y="164" width="22" height="14" rx="1"/>
+          <rect x="5" y="184" width="22" height="14" rx="1"/>
+          <rect x="5" y="204" width="22" height="14" rx="1"/>
+          <rect x="5" y="224" width="22" height="14" rx="1"/>
+          <rect x="5" y="244" width="22" height="14" rx="1"/>
+          <rect x="5" y="264" width="22" height="14" rx="1"/>
+          <rect x="5" y="284" width="22" height="14" rx="1"/>
+        </g>
+      </svg>
+    </div>
   </header>
 
   <!-- API KEY SETUP -->
@@ -787,6 +967,53 @@
     </div>
   </div>
 
+  <!-- CRISIS CARD -->
+  <div class="crisis-card" id="crisis-card">
+    <div class="crisis-icon">🌿</div>
+    <div class="crisis-title">Before we continue</div>
+    <p class="crisis-text">
+      It sounds like you might be carrying something heavy right now.<br>
+      You don't have to navigate this alone.
+    </p>
+    <div class="crisis-resources">
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🇦🇺 Australia</div>
+        <div class="crisis-resource-name">Lifeline</div>
+        <div class="crisis-resource-number">13 11 14</div>
+      </div>
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🇦🇺 Australia</div>
+        <div class="crisis-resource-name">Beyond Blue</div>
+        <div class="crisis-resource-number">1300 22 4636</div>
+      </div>
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🇳🇿 New Zealand</div>
+        <div class="crisis-resource-name">Lifeline NZ</div>
+        <div class="crisis-resource-number">0800 543 354</div>
+      </div>
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🇬🇧 United Kingdom</div>
+        <div class="crisis-resource-name">Samaritans</div>
+        <div class="crisis-resource-number">116 123</div>
+      </div>
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🇺🇸 United States</div>
+        <div class="crisis-resource-name">Crisis Lifeline</div>
+        <div class="crisis-resource-number">988</div>
+      </div>
+      <div class="crisis-resource">
+        <div class="crisis-resource-country">🌍 Everywhere else</div>
+        <div class="crisis-resource-name">Find a helpline</div>
+        <a href="https://findahelpline.com" target="_blank" class="crisis-resource-link">findahelpline.com</a>
+      </div>
+    </div>
+    <div class="crisis-divider">When you're ready, you can continue — or step away. Both are okay.</div>
+    <div class="crisis-actions">
+      <button class="crisis-continue-btn" id="crisis-continue">I'd like to continue journaling</button>
+      <button class="crisis-stop-btn" id="crisis-stop">I'll step away and reach out for support</button>
+    </div>
+  </div>
+
   <!-- LOADING -->
   <div class="loading-state" id="loading">
     <div class="film-reel"></div>
@@ -809,7 +1036,7 @@
     <p class="story-beat" id="r-beat"></p>
     <div class="note-block">
       <div class="note-label">Director's Note</div>
-      <p class="note-text" id="r-director"></p>
+      <ul class="directors-note-list" id="r-director"></ul>
     </div>
     <div class="opportunity-block">
       <div class="opportunity-label">Hidden Opportunity</div>
@@ -860,24 +1087,54 @@
   let entries = JSON.parse(localStorage.getItem('tp_entries') || '[]');
   let apiKey = localStorage.getItem('tp_api_key') || '';
 
+  // ── CRISIS KEYWORDS ──
+  const CRISIS_KEYWORDS = [
+    'suicide', 'suicidal', 'kill myself', 'end my life',
+    'don\'t want to be here', 'dont want to be here',
+    'don\'t want to live', 'dont want to live',
+    'no reason to live', 'better off dead',
+    'self harm', 'self-harm', 'hurt myself',
+    'cutting myself', 'overdose', 'want to die',
+    'can\'t go on', 'cant go on', 'ending it all'
+  ];
+
+  function checkForCrisis(text) {
+    const lower = text.toLowerCase();
+    return CRISIS_KEYWORDS.some(k => lower.includes(k));
+  }
+
+  function showCrisisCard() {
+    return new Promise((resolve) => {
+      const card = document.getElementById('crisis-card');
+      card.classList.add('visible');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      document.getElementById('crisis-continue').onclick = () => {
+        card.classList.remove('visible');
+        resolve(true);
+      };
+
+      document.getElementById('crisis-stop').onclick = () => {
+        card.classList.remove('visible');
+        resolve(false);
+      };
+    });
+  }
+
   // ── INIT ──
   document.addEventListener('DOMContentLoaded', () => {
-    // Set date
     const now = new Date();
     document.getElementById('today-date').textContent = now.toLocaleDateString('en-AU', {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     });
 
-    // Update scene counter
     updateSceneLabel();
 
-    // If key exists, show it's connected
     if (apiKey) {
       showKeyStatus('success', '✓ API key connected — engine is live');
       document.getElementById('api-key-input').value = '••••••••••••••••••••';
     }
 
-    // Render reel
     renderReel();
   });
 
@@ -929,6 +1186,12 @@
       return;
     }
 
+    // Crisis check — pause before anything else
+    if (checkForCrisis(text)) {
+      const proceed = await showCrisisCard();
+      if (!proceed) return;
+    }
+
     // Hide previous results
     document.getElementById('scene-card').classList.remove('visible');
     document.getElementById('error-card').classList.remove('visible');
@@ -955,7 +1218,7 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
 {
   "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year She Stopped Asking Permission, Learning to Hold the Wheel",
   "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat — the person is the protagonist. Specific, not generic.",
-  "directors_note": "Exactly 2-3 short punchy observations as separate sentences. First: what they did well. Second: one honest redirect or question. Third: a permission or encouragement. Each sentence stands alone. No flowing paragraphs.",
+  "directors_note": ["One short punchy sentence about what they did well.", "One honest redirect or question — no more than one sentence.", "One permission or encouragement — one sentence."],
   "opportunity": "1-2 grounded sentences. What is this moment opening up, even if it doesn't feel like it yet? Not a motivational poster — something true and specific."
 }`,
           messages: [{ role: 'user', content: text }]
@@ -990,11 +1253,9 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       entries.unshift(entry);
       localStorage.setItem('tp_entries', JSON.stringify(entries));
 
-      // Display
       showScene(entry);
       renderReel();
 
-      // Clear input
       document.getElementById('journal-input').value = '';
       updateCharCount();
       updateSceneLabel();
@@ -1021,10 +1282,15 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     }
     if (!currentEntry) return;
 
+    // Build narration — handle directors_note as array or string
+    const dirNote = Array.isArray(currentEntry.directors_note)
+      ? currentEntry.directors_note.join(' ... ')
+      : currentEntry.directors_note;
+
     const script = [
       currentEntry.chapter_title + '.',
       currentEntry.story_beat,
-      "Director's note. " + currentEntry.directors_note,
+      "Director's note. " + dirNote,
       "The hidden opportunity. " + currentEntry.opportunity
     ].join(' ... ');
 
@@ -1033,7 +1299,6 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     utterance.pitch = 0.95;
     utterance.volume = 1;
 
-    // Try to find a warm voice
     const voices = speechSynth.getVoices();
     const preferred = voices.find(v =>
       v.name.includes('Samantha') ||
@@ -1058,7 +1323,6 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     const btn = document.getElementById('voice-btn');
     const label = document.getElementById('voice-btn-label');
     btn.classList.toggle('playing', playing);
-    label.textContent = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
     label.innerHTML = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
   }
 
@@ -1086,7 +1350,6 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     currentEntry = entry;
     currentEntryId = entry.id;
 
-    // Stop any playing narration
     if (isSpeaking) { speechSynth.cancel(); setVoiceState(false); }
 
     const num = 'Scene ' + String(entry.sceneNum).padStart(3, '0');
@@ -1094,10 +1357,16 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     document.getElementById('r-date').textContent = entry.date;
     document.getElementById('r-chapter').textContent = entry.chapter_title || '';
     document.getElementById('r-beat').textContent = entry.story_beat || '';
-    document.getElementById('r-director').textContent = entry.directors_note || '';
-    document.getElementById('r-opportunity').textContent = entry.opportunity || '';
 
-    // Load saved reflection if exists
+    // Director's note — render as 3 separate list items
+    const directorEl = document.getElementById('r-director');
+    const notes = Array.isArray(entry.directors_note)
+      ? entry.directors_note
+      : (entry.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
+
+    directorEl.innerHTML = notes.map(note => `<li>${note}</li>`).join('');
+
+    document.getElementById('r-opportunity').textContent = entry.opportunity || '';
     document.getElementById('reflection-input').value = entry.reflection || '';
     document.getElementById('reflection-saved').classList.remove('visible');
 
