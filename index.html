@@ -14,7 +14,6 @@
     --amber-dim: #6b4a0a;
     --cream: #e8dfc8;
     --muted: #4a3f2f;
-    --grain-opacity: 0.04;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,48 +27,23 @@
     position: relative;
   }
 
-  /* Breathing amber glow — warm, safe, no flicker */
-  body::after {
-    content: '';
+  /* Breathing amber glow */
+  .ambient-glow {
     position: fixed;
     top: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 70%;
     height: 55%;
-    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.09) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.12) 0%, transparent 70%);
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
     animation: ambientGlow 5s ease-in-out infinite;
   }
 
   @keyframes ambientGlow {
     0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-    50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
-  }
-
-  /* Film strip */
-  .film-strip-wrap {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    margin: -40px -24px 40px;
-    overflow: hidden;
-  }
-
-  .film-strip-side {
-    flex-shrink: 0;
-    width: 32px;
-  }
-
-  .film-strip-center {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 40px 24px;
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
   }
 
   .container {
@@ -108,10 +82,7 @@
     letter-spacing: -0.02em;
   }
 
-  .main-title em {
-    font-style: italic;
-    color: var(--amber);
-  }
+  .main-title em { font-style: italic; color: var(--amber); }
 
   .tagline {
     font-family: 'Crimson Text', serif;
@@ -132,38 +103,11 @@
     margin-bottom: 48px;
   }
 
-  .setup-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .setup-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--parchment);
-    margin-bottom: 8px;
-  }
-
-  .setup-desc {
-    font-size: 15px;
-    color: rgba(232, 223, 200, 0.55);
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
-
-  .setup-desc a {
-    color: var(--amber);
-    text-decoration: none;
-  }
-
-  .key-input-row {
-    display: flex;
-    gap: 10px;
-  }
+  .setup-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; }
+  .setup-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--parchment); margin-bottom: 8px; }
+  .setup-desc { font-size: 15px; color: rgba(232, 223, 200, 0.55); margin-bottom: 16px; line-height: 1.5; }
+  .setup-desc a { color: var(--amber); text-decoration: none; }
+  .key-input-row { display: flex; gap: 10px; }
 
   .key-input {
     flex: 1;
@@ -198,54 +142,15 @@
 
   .key-save-btn:hover { background: var(--amber-bright); }
 
-  .key-status {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    margin-top: 10px;
-    padding: 8px 12px;
-    border-radius: 2px;
-    display: none;
-  }
-
-  .key-status.success {
-    display: block;
-    background: rgba(100, 180, 100, 0.1);
-    border: 1px solid rgba(100, 180, 100, 0.3);
-    color: #90d090;
-  }
-
-  .key-status.error {
-    display: block;
-    background: rgba(180, 80, 80, 0.1);
-    border: 1px solid rgba(180, 80, 80, 0.3);
-    color: #d09090;
-  }
+  .key-status { font-family: 'Space Mono', monospace; font-size: 10px; margin-top: 10px; padding: 8px 12px; border-radius: 2px; display: none; }
+  .key-status.success { display: block; background: rgba(100, 180, 100, 0.1); border: 1px solid rgba(100, 180, 100, 0.3); color: #90d090; }
+  .key-status.error { display: block; background: rgba(180, 80, 80, 0.1); border: 1px solid rgba(180, 80, 80, 0.3); color: #d09090; }
 
   /* ── JOURNAL INPUT ── */
   .journal-section { margin-bottom: 60px; }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .scene-counter {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--amber);
-    text-transform: uppercase;
-  }
-
-  .date-stamp {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(232, 223, 200, 0.3);
-    letter-spacing: 0.1em;
-    margin-left: auto;
-  }
+  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; }
+  .scene-counter { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; }
+  .date-stamp { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.3); letter-spacing: 0.1em; margin-left: auto; }
 
   .journal-textarea {
     width: 100%;
@@ -264,29 +169,10 @@
     transition: border-color 0.3s;
   }
 
-  .journal-textarea:focus {
-    border-color: rgba(200, 134, 10, 0.5);
-    background: rgba(255,255,255,0.03);
-  }
-
-  .journal-textarea::placeholder {
-    color: rgba(232, 223, 200, 0.2);
-    font-style: italic;
-  }
-
-  .journal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
-  }
-
-  .char-count {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(232, 223, 200, 0.25);
-    letter-spacing: 0.1em;
-  }
+  .journal-textarea:focus { border-color: rgba(200, 134, 10, 0.5); background: rgba(255,255,255,0.03); }
+  .journal-textarea::placeholder { color: rgba(232, 223, 200, 0.2); font-style: italic; }
+  .journal-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+  .char-count { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.25); letter-spacing: 0.1em; }
 
   .roll-btn {
     background: transparent;
@@ -303,22 +189,11 @@
     overflow: hidden;
   }
 
-  .roll-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--amber);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-    z-index: -1;
-  }
-
+  .roll-btn::before { content: ''; position: absolute; inset: 0; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1; }
   .roll-btn:hover { color: var(--ink); }
   .roll-btn:hover::before { transform: scaleX(1); }
-  .roll-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .roll-btn:disabled { opacity: 0.4; cursor: not-allowed; color: var(--amber); }
   .roll-btn:disabled::before { transform: scaleX(0); }
-  .roll-btn:disabled { color: var(--amber); }
 
   /* ── CRISIS CARD ── */
   .crisis-card {
@@ -329,167 +204,52 @@
     margin-bottom: 40px;
     text-align: center;
     animation: fadeUp 0.6s ease forwards;
-    position: relative;
   }
 
   .crisis-card.visible { display: block; }
-
-  .crisis-icon {
-    font-size: 28px;
-    margin-bottom: 20px;
-    opacity: 0.8;
-  }
-
-  .crisis-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 700;
-    color: var(--parchment);
-    margin-bottom: 16px;
-  }
-
-  .crisis-text {
-    font-family: 'Crimson Text', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.7;
-    color: rgba(232, 223, 200, 0.65);
-    max-width: 500px;
-    margin: 0 auto 36px;
-  }
-
-  .crisis-resources {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-  }
-
-  .crisis-resource {
-    border: 1px solid rgba(200, 134, 10, 0.2);
-    padding: 16px 24px;
-    text-align: center;
-    min-width: 160px;
-  }
-
-  .crisis-resource-country {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.3em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .crisis-resource-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(232, 223, 200, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .crisis-resource-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: var(--amber);
-  }
-
-  .crisis-resource-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--amber);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-  }
-
+  .crisis-icon { font-size: 28px; margin-bottom: 20px; opacity: 0.8; }
+  .crisis-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--parchment); margin-bottom: 16px; }
+  .crisis-text { font-family: 'Crimson Text', serif; font-size: 18px; font-style: italic; line-height: 1.7; color: rgba(232, 223, 200, 0.65); max-width: 500px; margin: 0 auto 36px; }
+  .crisis-resources { display: flex; justify-content: center; gap: 16px; margin-bottom: 36px; flex-wrap: wrap; }
+  .crisis-resource { border: 1px solid rgba(200, 134, 10, 0.2); padding: 14px 20px; text-align: center; min-width: 140px; }
+  .crisis-resource-country { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.3em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 4px; }
+  .crisis-resource-name { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(232, 223, 200, 0.5); text-transform: uppercase; margin-bottom: 8px; }
+  .crisis-resource-number { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--amber); }
+  .crisis-resource-link { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--amber); text-decoration: none; letter-spacing: 0.1em; }
   .crisis-resource-link:hover { color: var(--amber-bright); }
-
-  .crisis-divider {
-    font-family: 'Crimson Text', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.2);
-    margin-bottom: 28px;
-  }
-
-  .crisis-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-  }
+  .crisis-divider { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.2); margin-bottom: 28px; }
+  .crisis-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
   .crisis-continue-btn {
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.35);
-    color: rgba(232, 223, 200, 0.5);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    padding: 12px 28px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    border-radius: 2px;
+    background: transparent; border: 1px solid rgba(200, 134, 10, 0.35); color: rgba(232, 223, 200, 0.5);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; padding: 12px 28px;
+    cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 2px;
   }
 
-  .crisis-continue-btn:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-  }
+  .crisis-continue-btn:hover { border-color: var(--amber); color: var(--amber); }
 
   .crisis-stop-btn {
-    background: transparent;
-    border: none;
-    color: rgba(232, 223, 200, 0.25);
-    font-family: 'Crimson Text', serif;
-    font-size: 15px;
-    font-style: italic;
-    cursor: pointer;
-    transition: color 0.2s;
-    padding: 4px;
+    background: transparent; border: none; color: rgba(232, 223, 200, 0.25);
+    font-family: 'Crimson Text', serif; font-size: 15px; font-style: italic;
+    cursor: pointer; transition: color 0.2s; padding: 4px;
   }
 
   .crisis-stop-btn:hover { color: rgba(232, 223, 200, 0.5); }
 
   /* ── LOADING ── */
-  .loading-state {
-    display: none;
-    text-align: center;
-    padding: 60px 0;
-  }
-
+  .loading-state { display: none; text-align: center; padding: 60px 0; }
   .loading-state.visible { display: block; }
 
   .film-reel {
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    border: 2px solid rgba(200, 134, 10, 0.2);
-    border-top-color: var(--amber);
-    border-radius: 50%;
-    animation: reel 1s linear infinite;
-    margin-bottom: 20px;
+    display: inline-block; width: 48px; height: 48px;
+    border: 2px solid rgba(200, 134, 10, 0.2); border-top-color: var(--amber);
+    border-radius: 50%; animation: reel 1s linear infinite; margin-bottom: 20px;
   }
 
   @keyframes reel { to { transform: rotate(360deg); } }
 
-  .loading-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--amber);
-    text-transform: uppercase;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
+  .loading-text { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
   /* ── SCENE CARD ── */
   .scene-card {
@@ -504,370 +264,93 @@
 
   .scene-card.visible { display: block; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  .scene-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(200, 134, 10, 0.03) 0%, transparent 60%);
-    pointer-events: none;
-  }
+  .scene-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200, 134, 10, 0.03) 0%, transparent 60%); pointer-events: none; }
+  .scene-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .scene-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.35em; color: var(--amber); text-transform: uppercase; }
+  .scene-date { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.3); letter-spacing: 0.1em; }
 
-  .scene-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-  }
+  .chapter-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.1; color: var(--parchment); margin-bottom: 28px; letter-spacing: -0.01em; }
 
-  .scene-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    color: var(--amber);
-    text-transform: uppercase;
-  }
-
-  .scene-date {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(232, 223, 200, 0.3);
-    letter-spacing: 0.1em;
-  }
-
-  .chapter-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--parchment);
-    margin-bottom: 28px;
-    letter-spacing: -0.01em;
-  }
-
-  .story-beat {
-    font-family: 'Crimson Text', serif;
-    font-size: 19px;
-    font-style: italic;
-    line-height: 1.7;
-    color: rgba(232, 223, 200, 0.75);
-    margin-bottom: 32px;
-    padding-left: 20px;
-    border-left: 2px solid rgba(200, 134, 10, 0.3);
-  }
+  .story-beat { font-family: 'Crimson Text', serif; font-size: 19px; font-style: italic; line-height: 1.7; color: rgba(232, 223, 200, 0.75); margin-bottom: 32px; padding-left: 20px; border-left: 2px solid rgba(200, 134, 10, 0.3); }
 
   .note-block { margin-bottom: 24px; }
+  .note-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.6); text-transform: uppercase; margin-bottom: 12px; }
 
-  .note-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: rgba(200, 134, 10, 0.6);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  /* ── DIRECTOR'S NOTE — 3 punchy lines ── */
-  .directors-note-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .directors-note-list li {
-    font-family: 'Crimson Text', serif;
-    font-size: 17px;
-    line-height: 1.55;
-    color: rgba(232, 223, 200, 0.6);
-    padding: 10px 0 10px 20px;
-    border-left: 1px solid rgba(200, 134, 10, 0.15);
-    margin-bottom: 8px;
-    position: relative;
-  }
-
-  .directors-note-list li::before {
-    content: '';
-    position: absolute;
-    left: -1px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: rgba(200, 134, 10, 0.15);
-  }
-
+  /* Director's note — 3 punchy lines */
+  .directors-note-list { list-style: none; padding: 0; margin: 0; }
+  .directors-note-list li { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.55; color: rgba(232, 223, 200, 0.6); padding: 10px 0 10px 20px; border-left: 1px solid rgba(200, 134, 10, 0.15); margin-bottom: 8px; }
   .directors-note-list li:last-child { margin-bottom: 0; }
 
-  .opportunity-block {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(200, 134, 10, 0.15);
-  }
+  .opportunity-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(200, 134, 10, 0.15); }
+  .opportunity-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.6); text-transform: uppercase; margin-bottom: 10px; }
+  .opportunity-text { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--amber-bright); text-transform: uppercase; line-height: 1.6; }
 
-  .opportunity-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: rgba(200, 134, 10, 0.6);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .opportunity-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--amber-bright);
-    text-transform: uppercase;
-    line-height: 1.6;
-  }
-
-  /* ── VOICEOVER BUTTON ── */
+  /* ── VOICEOVER ── */
   .voice-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.3);
-    color: rgba(200, 134, 10, 0.7);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    padding: 10px 18px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    margin-top: 20px;
-    border-radius: 2px;
+    display: flex; align-items: center; gap: 10px; background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.7);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+    padding: 10px 18px; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s; margin-top: 20px; border-radius: 2px;
   }
 
   .voice-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .voice-btn.playing { border-color: var(--amber); color: var(--amber); background: rgba(200, 134, 10, 0.05); }
+  .voice-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+  .voice-btn.playing .voice-dot { animation: blink 0.8s ease-in-out infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-  .voice-btn.playing {
-    border-color: var(--amber);
-    color: var(--amber);
-    background: rgba(200, 134, 10, 0.05);
-  }
-
-  .voice-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--amber);
-  }
-
-  .voice-btn.playing .voice-dot {
-    animation: blink 0.8s ease-in-out infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  /* ── REFLECTION BLOCK ── */
-  .reflection-block {
-    margin-top: 32px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(200, 134, 10, 0.12);
-  }
-
-  .reflection-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .reflection-sublabel {
-    font-family: 'Crimson Text', serif;
-    font-size: 14px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.3);
-    margin-bottom: 12px;
-  }
+  /* ── REFLECTION ── */
+  .reflection-block { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(200, 134, 10, 0.12); }
+  .reflection-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 6px; }
+  .reflection-sublabel { font-family: 'Crimson Text', serif; font-size: 14px; font-style: italic; color: rgba(232, 223, 200, 0.3); margin-bottom: 12px; }
 
   .reflection-textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.015);
-    border: 1px solid rgba(200, 134, 10, 0.12);
-    color: rgba(232, 223, 200, 0.7);
-    font-family: 'Crimson Text', serif;
-    font-size: 17px;
-    font-style: italic;
-    line-height: 1.65;
-    padding: 16px 20px;
-    border-radius: 2px;
-    resize: none;
-    outline: none;
-    min-height: 100px;
-    transition: border-color 0.2s, background 0.2s;
+    width: 100%; background: rgba(255,255,255,0.015); border: 1px solid rgba(200, 134, 10, 0.12);
+    color: rgba(232, 223, 200, 0.7); font-family: 'Crimson Text', serif; font-size: 17px;
+    font-style: italic; line-height: 1.65; padding: 16px 20px; border-radius: 2px;
+    resize: none; outline: none; min-height: 100px; transition: border-color 0.2s, background 0.2s;
   }
 
-  .reflection-textarea:focus {
-    border-color: rgba(200, 134, 10, 0.3);
-    background: rgba(255,255,255,0.025);
-  }
-
-  .reflection-textarea::placeholder {
-    color: rgba(232, 223, 200, 0.15);
-    font-style: italic;
-  }
+  .reflection-textarea:focus { border-color: rgba(200, 134, 10, 0.3); background: rgba(255,255,255,0.025); }
+  .reflection-textarea::placeholder { color: rgba(232, 223, 200, 0.15); font-style: italic; }
 
   .reflection-save-btn {
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.2);
-    color: rgba(200, 134, 10, 0.5);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    padding: 8px 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin-top: 10px;
-    transition: all 0.2s;
-    border-radius: 2px;
+    background: transparent; border: 1px solid rgba(200, 134, 10, 0.2); color: rgba(200, 134, 10, 0.5);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; padding: 8px 16px;
+    cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: all 0.2s; border-radius: 2px;
   }
 
   .reflection-save-btn:hover { border-color: var(--amber); color: var(--amber); }
-
-  .reflection-saved {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(100, 180, 100, 0.6);
-    margin-top: 8px;
-    display: none;
-  }
-
+  .reflection-saved { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(100, 180, 100, 0.6); margin-top: 8px; display: none; }
   .reflection-saved.visible { display: block; }
 
-  .error-card {
-    display: none;
-    background: rgba(180, 80, 80, 0.08);
-    border: 1px solid rgba(180, 80, 80, 0.25);
-    padding: 24px 28px;
-    margin-bottom: 40px;
-    border-radius: 2px;
-  }
-
+  .error-card { display: none; background: rgba(180, 80, 80, 0.08); border: 1px solid rgba(180, 80, 80, 0.25); padding: 24px 28px; margin-bottom: 40px; border-radius: 2px; }
   .error-card.visible { display: block; }
-
-  .error-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: #d09090;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
+  .error-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: #d09090; text-transform: uppercase; margin-bottom: 8px; }
   .error-msg { font-size: 15px; color: rgba(208, 144, 144, 0.7); line-height: 1.5; }
 
   /* ── THE REEL ── */
-  .reel-section {
-    padding: 40px 0 80px;
-    border-top: 1px solid rgba(200, 134, 10, 0.15);
-  }
+  .reel-section { padding: 40px 0 80px; border-top: 1px solid rgba(200, 134, 10, 0.15); }
+  .reel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .reel-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.4em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; }
+  .reel-count { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.25); letter-spacing: 0.1em; }
+  .reel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 
-  .reel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 28px;
-  }
-
-  .reel-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-  }
-
-  .reel-count {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(232, 223, 200, 0.25);
-    letter-spacing: 0.1em;
-  }
-
-  .reel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-  }
-
-  .reel-card {
-    border: 1px solid rgba(200, 134, 10, 0.15);
-    padding: 16px 18px;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .reel-card:hover {
-    border-color: rgba(200, 134, 10, 0.4);
-    background: rgba(200, 134, 10, 0.04);
-  }
-
-  .reel-card.active {
-    border-color: var(--amber);
-    background: rgba(200, 134, 10, 0.06);
-  }
-
-  .reel-scene-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .reel-scene-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    color: var(--parchment);
-    line-height: 1.3;
-    margin-bottom: 6px;
-  }
-
-  .reel-scene-date {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(232, 223, 200, 0.25);
-  }
-
-  .empty-reel {
-    font-family: 'Crimson Text', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.2);
-    text-align: center;
-    padding: 40px 0;
-  }
+  .reel-card { border: 1px solid rgba(200, 134, 10, 0.15); padding: 16px 18px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .reel-card:hover { border-color: rgba(200, 134, 10, 0.4); background: rgba(200, 134, 10, 0.04); }
+  .reel-card.active { border-color: var(--amber); background: rgba(200, 134, 10, 0.06); }
+  .reel-scene-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; }
+  .reel-scene-title { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--parchment); line-height: 1.3; margin-bottom: 6px; }
+  .reel-scene-date { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(232, 223, 200, 0.25); }
+  .empty-reel { font-family: 'Crimson Text', serif; font-size: 16px; font-style: italic; color: rgba(232, 223, 200, 0.2); text-align: center; padding: 40px 0; }
 
   /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 20px 0 40px;
-    border-top: 1px solid rgba(200, 134, 10, 0.1);
-  }
+  footer { text-align: center; padding: 20px 0 40px; border-top: 1px solid rgba(200, 134, 10, 0.1); }
+  footer p { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(232, 223, 200, 0.15); text-transform: uppercase; }
 
-  footer p {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(232, 223, 200, 0.15);
-    text-transform: uppercase;
-  }
-
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--ink); }
   ::-webkit-scrollbar-thumb { background: rgba(200, 134, 10, 0.3); border-radius: 2px; }
@@ -875,61 +358,14 @@
 </head>
 <body>
 
+<div class="ambient-glow"></div>
+
 <div class="container">
 
-  <header style="padding: 0 0 40px; border-bottom: 1px solid rgba(200, 134, 10, 0.2); margin-bottom: 60px; overflow: hidden;">
-    <div class="film-strip-wrap">
-      <!-- Left strip -->
-      <svg class="film-strip-side" viewBox="0 0 32 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="300" fill="#1a1208"/>
-        <rect x="2" y="0" width="28" height="300" fill="#0f0c06"/>
-        <g fill="#0a0805">
-          <rect x="5" y="4" width="22" height="14" rx="1"/>
-          <rect x="5" y="24" width="22" height="14" rx="1"/>
-          <rect x="5" y="44" width="22" height="14" rx="1"/>
-          <rect x="5" y="64" width="22" height="14" rx="1"/>
-          <rect x="5" y="84" width="22" height="14" rx="1"/>
-          <rect x="5" y="104" width="22" height="14" rx="1"/>
-          <rect x="5" y="124" width="22" height="14" rx="1"/>
-          <rect x="5" y="144" width="22" height="14" rx="1"/>
-          <rect x="5" y="164" width="22" height="14" rx="1"/>
-          <rect x="5" y="184" width="22" height="14" rx="1"/>
-          <rect x="5" y="204" width="22" height="14" rx="1"/>
-          <rect x="5" y="224" width="22" height="14" rx="1"/>
-          <rect x="5" y="244" width="22" height="14" rx="1"/>
-          <rect x="5" y="264" width="22" height="14" rx="1"/>
-          <rect x="5" y="284" width="22" height="14" rx="1"/>
-        </g>
-      </svg>
-      <!-- Centre content -->
-      <div class="film-strip-center">
-        <div class="brand-label">A cinematic journal</div>
-        <h1 class="main-title">The Turning<br><em>Point</em></h1>
-        <p class="tagline">Your life is not a series of accidents. Write today's scene — the AI will find the story you missed.</p>
-      </div>
-      <!-- Right strip -->
-      <svg class="film-strip-side" viewBox="0 0 32 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="300" fill="#1a1208"/>
-        <rect x="2" y="0" width="28" height="300" fill="#0f0c06"/>
-        <g fill="#0a0805">
-          <rect x="5" y="4" width="22" height="14" rx="1"/>
-          <rect x="5" y="24" width="22" height="14" rx="1"/>
-          <rect x="5" y="44" width="22" height="14" rx="1"/>
-          <rect x="5" y="64" width="22" height="14" rx="1"/>
-          <rect x="5" y="84" width="22" height="14" rx="1"/>
-          <rect x="5" y="104" width="22" height="14" rx="1"/>
-          <rect x="5" y="124" width="22" height="14" rx="1"/>
-          <rect x="5" y="144" width="22" height="14" rx="1"/>
-          <rect x="5" y="164" width="22" height="14" rx="1"/>
-          <rect x="5" y="184" width="22" height="14" rx="1"/>
-          <rect x="5" y="204" width="22" height="14" rx="1"/>
-          <rect x="5" y="224" width="22" height="14" rx="1"/>
-          <rect x="5" y="244" width="22" height="14" rx="1"/>
-          <rect x="5" y="264" width="22" height="14" rx="1"/>
-          <rect x="5" y="284" width="22" height="14" rx="1"/>
-        </g>
-      </svg>
-    </div>
+  <header>
+    <div class="brand-label">A cinematic journal</div>
+    <h1 class="main-title">The Turning<br><em>Point</em></h1>
+    <p class="tagline">Your life is not a series of accidents. Write today's scene — the AI will find the story you missed.</p>
   </header>
 
   <!-- API KEY SETUP -->
@@ -952,18 +388,10 @@
       <span class="scene-counter" id="next-scene-label">Scene 001</span>
       <span class="date-stamp" id="today-date"></span>
     </div>
-    <textarea
-      class="journal-textarea"
-      id="journal-input"
-      placeholder="What happened today? Write it raw. The AI will find the story inside..."
-      maxlength="2000"
-      oninput="updateCharCount()"
-    ></textarea>
+    <textarea class="journal-textarea" id="journal-input" placeholder="What happened today? Write it raw. The AI will find the story inside..." maxlength="2000" oninput="updateCharCount()"></textarea>
     <div class="journal-footer">
       <span class="char-count" id="char-count">0 / 2000</span>
-      <button class="roll-btn" id="roll-btn" onclick="rollCamera()">
-        ▶ &nbsp; Roll Camera
-      </button>
+      <button class="roll-btn" id="roll-btn" onclick="rollCamera()">▶ &nbsp; Roll Camera</button>
     </div>
   </div>
 
@@ -971,10 +399,7 @@
   <div class="crisis-card" id="crisis-card">
     <div class="crisis-icon">🌿</div>
     <div class="crisis-title">Before we continue</div>
-    <p class="crisis-text">
-      It sounds like you might be carrying something heavy right now.<br>
-      You don't have to navigate this alone.
-    </p>
+    <p class="crisis-text">It sounds like you might be carrying something heavy right now.<br>You don't have to navigate this alone.</p>
     <div class="crisis-resources">
       <div class="crisis-resource">
         <div class="crisis-resource-country">🇦🇺 Australia</div>
@@ -1042,25 +467,15 @@
       <div class="opportunity-label">Hidden Opportunity</div>
       <p class="opportunity-text" id="r-opportunity"></p>
     </div>
-
-    <!-- VOICEOVER -->
     <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
       <span class="voice-dot"></span>
       <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
     </button>
-
-    <!-- REFLECTION -->
     <div class="reflection-block">
       <div class="reflection-label">Your Reflection</div>
       <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
-      <textarea
-        class="reflection-textarea"
-        id="reflection-input"
-        placeholder="Write back to your scene..."
-        rows="4"
-        oninput="onReflectionInput()"
-      ></textarea>
-      <button class="reflection-save-btn" id="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
+      <textarea class="reflection-textarea" id="reflection-input" placeholder="Write back to your scene..." rows="4" oninput="onReflectionInput()"></textarea>
+      <button class="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
       <div class="reflection-saved" id="reflection-saved">✓ Saved to your reel</div>
     </div>
   </div>
@@ -1083,11 +498,9 @@
 </div>
 
 <script>
-  // ── STATE ──
   let entries = JSON.parse(localStorage.getItem('tp_entries') || '[]');
   let apiKey = localStorage.getItem('tp_api_key') || '';
 
-  // ── CRISIS KEYWORDS ──
   const CRISIS_KEYWORDS = [
     'suicide', 'suicidal', 'kill myself', 'end my life',
     'don\'t want to be here', 'dont want to be here',
@@ -1099,8 +512,7 @@
   ];
 
   function checkForCrisis(text) {
-    const lower = text.toLowerCase();
-    return CRISIS_KEYWORDS.some(k => lower.includes(k));
+    return CRISIS_KEYWORDS.some(k => text.toLowerCase().includes(k));
   }
 
   function showCrisisCard() {
@@ -1108,47 +520,28 @@
       const card = document.getElementById('crisis-card');
       card.classList.add('visible');
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      document.getElementById('crisis-continue').onclick = () => {
-        card.classList.remove('visible');
-        resolve(true);
-      };
-
-      document.getElementById('crisis-stop').onclick = () => {
-        card.classList.remove('visible');
-        resolve(false);
-      };
+      document.getElementById('crisis-continue').onclick = () => { card.classList.remove('visible'); resolve(true); };
+      document.getElementById('crisis-stop').onclick = () => { card.classList.remove('visible'); resolve(false); };
     });
   }
 
-  // ── INIT ──
   document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     document.getElementById('today-date').textContent = now.toLocaleDateString('en-AU', {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     });
-
     updateSceneLabel();
-
     if (apiKey) {
       showKeyStatus('success', '✓ API key connected — engine is live');
       document.getElementById('api-key-input').value = '••••••••••••••••••••';
     }
-
     renderReel();
   });
 
-  // ── API KEY ──
   function saveKey() {
     const input = document.getElementById('api-key-input').value.trim();
-    if (!input || input.includes('•')) {
-      showKeyStatus('error', 'Please enter a valid API key');
-      return;
-    }
-    if (!input.startsWith('sk-ant-')) {
-      showKeyStatus('error', 'Key should start with sk-ant- — double check you copied it fully');
-      return;
-    }
+    if (!input || input.includes('•')) { showKeyStatus('error', 'Please enter a valid API key'); return; }
+    if (!input.startsWith('sk-ant-')) { showKeyStatus('error', 'Key should start with sk-ant- — double check you copied it fully'); return; }
     apiKey = input;
     localStorage.setItem('tp_api_key', apiKey);
     document.getElementById('api-key-input').value = '••••••••••••••••••••';
@@ -1161,38 +554,24 @@
     el.textContent = msg;
   }
 
-  // ── CHAR COUNT ──
   function updateCharCount() {
-    const val = document.getElementById('journal-input').value.length;
-    document.getElementById('char-count').textContent = val + ' / 2000';
+    document.getElementById('char-count').textContent = document.getElementById('journal-input').value.length + ' / 2000';
   }
 
   function updateSceneLabel() {
-    const num = String(entries.length + 1).padStart(3, '0');
-    document.getElementById('next-scene-label').textContent = 'Scene ' + num;
+    document.getElementById('next-scene-label').textContent = 'Scene ' + String(entries.length + 1).padStart(3, '0');
   }
 
-  // ── MAIN: ROLL CAMERA ──
   async function rollCamera() {
     const text = document.getElementById('journal-input').value.trim();
+    if (!text) { alert('Write something first — even just a few sentences about your day.'); return; }
+    if (!apiKey) { alert('Paste your Anthropic API key above first to bring the engine to life.'); return; }
 
-    if (!text) {
-      alert('Write something first — even just a few sentences about your day.');
-      return;
-    }
-
-    if (!apiKey) {
-      alert('Paste your Anthropic API key above first to bring the engine to life.');
-      return;
-    }
-
-    // Crisis check — pause before anything else
     if (checkForCrisis(text)) {
       const proceed = await showCrisisCard();
       if (!proceed) return;
     }
 
-    // Hide previous results
     document.getElementById('scene-card').classList.remove('visible');
     document.getElementById('error-card').classList.remove('visible');
     document.getElementById('loading').classList.add('visible');
@@ -1234,15 +613,13 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       const rawText = data.content[0].text.trim();
 
       let result;
-      try {
-        result = JSON.parse(rawText);
-      } catch {
+      try { result = JSON.parse(rawText); }
+      catch {
         const match = rawText.match(/\{[\s\S]*\}/);
         if (match) result = JSON.parse(match[0]);
         else throw new Error('Could not parse the AI response. Try again.');
       }
 
-      // Save entry
       const entry = {
         id: Date.now(),
         sceneNum: entries.length + 1,
@@ -1255,7 +632,6 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
 
       showScene(entry);
       renderReel();
-
       document.getElementById('journal-input').value = '';
       updateCharCount();
       updateSceneLabel();
@@ -1269,74 +645,45 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     }
   }
 
-  // ── VOICEOVER ──
   let speechSynth = window.speechSynthesis;
   let isSpeaking = false;
   let currentEntry = null;
 
   function toggleVoice() {
-    if (isSpeaking) {
-      speechSynth.cancel();
-      setVoiceState(false);
-      return;
-    }
+    if (isSpeaking) { speechSynth.cancel(); setVoiceState(false); return; }
     if (!currentEntry) return;
 
-    // Build narration — handle directors_note as array or string
     const dirNote = Array.isArray(currentEntry.directors_note)
       ? currentEntry.directors_note.join(' ... ')
       : currentEntry.directors_note;
 
-    const script = [
-      currentEntry.chapter_title + '.',
-      currentEntry.story_beat,
-      "Director's note. " + dirNote,
-      "The hidden opportunity. " + currentEntry.opportunity
-    ].join(' ... ');
-
+    const script = [currentEntry.chapter_title + '.', currentEntry.story_beat, "Director's note. " + dirNote, "The hidden opportunity. " + currentEntry.opportunity].join(' ... ');
     const utterance = new SpeechSynthesisUtterance(script);
-    utterance.rate = 0.88;
-    utterance.pitch = 0.95;
-    utterance.volume = 1;
+    utterance.rate = 0.88; utterance.pitch = 0.95; utterance.volume = 1;
 
     const voices = speechSynth.getVoices();
-    const preferred = voices.find(v =>
-      v.name.includes('Samantha') ||
-      v.name.includes('Karen') ||
-      v.name.includes('Moira') ||
-      v.name.includes('Female') ||
-      (v.lang === 'en-AU') ||
-      (v.lang === 'en-GB' && v.name.includes('Female'))
-    ) || voices.find(v => v.lang.startsWith('en'));
-
+    const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Moira') || v.name.includes('Female') || (v.lang === 'en-AU') || (v.lang === 'en-GB' && v.name.includes('Female'))) || voices.find(v => v.lang.startsWith('en'));
     if (preferred) utterance.voice = preferred;
 
     utterance.onstart = () => setVoiceState(true);
     utterance.onend = () => setVoiceState(false);
     utterance.onerror = () => setVoiceState(false);
-
     speechSynth.speak(utterance);
   }
 
   function setVoiceState(playing) {
     isSpeaking = playing;
-    const btn = document.getElementById('voice-btn');
-    const label = document.getElementById('voice-btn-label');
-    btn.classList.toggle('playing', playing);
-    label.innerHTML = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
+    document.getElementById('voice-btn').classList.toggle('playing', playing);
+    document.getElementById('voice-btn-label').innerHTML = playing ? '◼ &nbsp; Stop Narration' : '▶ &nbsp; Hear Your Scene';
   }
 
-  // ── REFLECTION ──
   let currentEntryId = null;
 
-  function onReflectionInput() {
-    document.getElementById('reflection-saved').classList.remove('visible');
-  }
+  function onReflectionInput() { document.getElementById('reflection-saved').classList.remove('visible'); }
 
   function saveReflection() {
     const text = document.getElementById('reflection-input').value.trim();
     if (!text || !currentEntryId) return;
-
     const idx = entries.findIndex(e => e.id === currentEntryId);
     if (idx !== -1) {
       entries[idx].reflection = text;
@@ -1345,39 +692,29 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
     }
   }
 
-  // ── DISPLAY SCENE ──
   function showScene(entry) {
     currentEntry = entry;
     currentEntryId = entry.id;
-
     if (isSpeaking) { speechSynth.cancel(); setVoiceState(false); }
 
-    const num = 'Scene ' + String(entry.sceneNum).padStart(3, '0');
-    document.getElementById('r-scene-num').textContent = num;
+    document.getElementById('r-scene-num').textContent = 'Scene ' + String(entry.sceneNum).padStart(3, '0');
     document.getElementById('r-date').textContent = entry.date;
     document.getElementById('r-chapter').textContent = entry.chapter_title || '';
     document.getElementById('r-beat').textContent = entry.story_beat || '';
 
-    // Director's note — render as 3 separate list items
-    const directorEl = document.getElementById('r-director');
     const notes = Array.isArray(entry.directors_note)
       ? entry.directors_note
       : (entry.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
-
-    directorEl.innerHTML = notes.map(note => `<li>${note}</li>`).join('');
+    document.getElementById('r-director').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
 
     document.getElementById('r-opportunity').textContent = entry.opportunity || '';
     document.getElementById('reflection-input').value = entry.reflection || '';
     document.getElementById('reflection-saved').classList.remove('visible');
-
     document.getElementById('scene-card').classList.add('visible');
 
-    setTimeout(() => {
-      document.getElementById('scene-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    setTimeout(() => { document.getElementById('scene-card').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
   }
 
-  // ── RENDER REEL ──
   function renderReel() {
     const grid = document.getElementById('reel-grid');
     const count = document.getElementById('reel-count');
