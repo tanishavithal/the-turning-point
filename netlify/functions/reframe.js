@@ -20,7 +20,8 @@ exports.handler = async function(event) {
       };
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    // Call Claude for reframing
+    const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,19 +40,20 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
   "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year She Stopped Asking Permission, Learning to Hold the Wheel",
   "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat — the person is the protagonist. Specific, not generic.",
   "directors_note": ["One short punchy sentence about what they did well.", "One honest redirect or question — no more than one sentence.", "One permission or encouragement — one sentence."],
-  "opportunity": "1-2 grounded sentences. What is this moment opening up, even if it doesn't feel like it yet? Not a motivational poster — something true and specific."
+  "opportunity": "1-2 grounded sentences. What is this moment opening up, even if it doesn't feel like it yet? Not a motivational poster — something true and specific.",
+  "mood_keywords": "2-3 comma-separated keywords that capture the emotional mood of this entry. Examples: resilience hope morning, grief loss quiet, joy celebration light, anxiety transition change"
 }`,
         messages: [{ role: 'user', content: text }]
       })
     });
 
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error?.message || 'API error ' + response.status);
+    if (!claudeResponse.ok) {
+      const err = await claudeResponse.json();
+      throw new Error(err.error?.message || 'API error ' + claudeResponse.status);
     }
 
-    const data = await response.json();
-    const rawText = data.content[0].text.trim();
+    const claudeData = await claudeResponse.json();
+    const rawText = claudeData.content[0].text.trim();
 
     let result;
     try { result = JSON.parse(rawText); }
@@ -61,10 +63,32 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       else throw new Error('Could not parse AI response');
     }
 
+    // Fetch mood image from Pexels
+    let imageUrl = null;
+    try {
+      const keywords = result.mood_keywords || 'cinematic life journey';
+      const pexelsResponse = await fetch(
+        `https://api.pexels.com/v1/search?query=${encodeURIComponent(keywords)}&per_page=15&orientation=landscape`,
+        { headers: { 'Authorization': process.env.PEXELS_API_KEY } }
+      );
+
+      if (pexelsResponse.ok) {
+        const pexelsData = await pexelsResponse.json();
+        if (pexelsData.photos && pexelsData.photos.length > 0) {
+          // Pick a random photo from the results for variety
+          const randomIndex = Math.floor(Math.random() * Math.min(pexelsData.photos.length, 10));
+          imageUrl = pexelsData.photos[randomIndex].src.large2x;
+        }
+      }
+    } catch (imgErr) {
+      // Image fetch failed — not critical, continue without image
+      console.log('Image fetch failed:', imgErr.message);
+    }
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(result)
+      body: JSON.stringify({ ...result, imageUrl })
     };
 
   } catch (err) {
