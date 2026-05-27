@@ -226,91 +226,29 @@
     margin: 0 auto 36px;
   }
 
-  .crisis-resources {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-  }
-
-  .crisis-resource {
-    border: 1px solid rgba(200, 134, 10, 0.2);
-    padding: 14px 20px;
-    text-align: center;
-    min-width: 140px;
-  }
-
-  .crisis-resource-country {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.3em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .crisis-resource-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(232, 223, 200, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .crisis-resource-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--amber);
-  }
-
-  .crisis-resource-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--amber);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-  }
-
+  .crisis-resources { display: flex; justify-content: center; gap: 16px; margin-bottom: 36px; flex-wrap: wrap; }
+  .crisis-resource { border: 1px solid rgba(200, 134, 10, 0.2); padding: 14px 20px; text-align: center; min-width: 140px; }
+  .crisis-resource-country { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.3em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 4px; }
+  .crisis-resource-name { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(232, 223, 200, 0.5); text-transform: uppercase; margin-bottom: 8px; }
+  .crisis-resource-number { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--amber); }
+  .crisis-resource-link { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--amber); text-decoration: none; letter-spacing: 0.1em; }
   .crisis-resource-link:hover { color: var(--amber-bright); }
-
-  .crisis-divider {
-    font-family: 'Crimson Text', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.2);
-    margin-bottom: 28px;
-  }
-
+  .crisis-divider { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.2); margin-bottom: 28px; }
   .crisis-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
   .crisis-continue-btn {
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.35);
-    color: rgba(232, 223, 200, 0.5);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    padding: 12px 28px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    border-radius: 2px;
+    background: transparent; border: 1px solid rgba(200, 134, 10, 0.35);
+    color: rgba(232, 223, 200, 0.5); font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em; padding: 12px 28px;
+    cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 2px;
   }
 
   .crisis-continue-btn:hover { border-color: var(--amber); color: var(--amber); }
 
   .crisis-stop-btn {
-    background: transparent;
-    border: none;
-    color: rgba(232, 223, 200, 0.25);
-    font-family: 'Crimson Text', serif;
-    font-size: 15px;
-    font-style: italic;
-    cursor: pointer;
-    transition: color 0.2s;
-    padding: 4px;
+    background: transparent; border: none; color: rgba(232, 223, 200, 0.25);
+    font-family: 'Crimson Text', serif; font-size: 15px; font-style: italic;
+    cursor: pointer; transition: color 0.2s; padding: 4px;
   }
 
   .crisis-stop-btn:hover { color: rgba(232, 223, 200, 0.5); }
@@ -320,24 +258,16 @@
   .loading-state.visible { display: block; }
 
   .film-reel {
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    border: 2px solid rgba(200, 134, 10, 0.2);
-    border-top-color: var(--amber);
-    border-radius: 50%;
-    animation: reel 1s linear infinite;
-    margin-bottom: 20px;
+    display: inline-block; width: 48px; height: 48px;
+    border: 2px solid rgba(200, 134, 10, 0.2); border-top-color: var(--amber);
+    border-radius: 50%; animation: reel 1s linear infinite; margin-bottom: 20px;
   }
 
   @keyframes reel { to { transform: rotate(360deg); } }
 
   .loading-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--amber);
-    text-transform: uppercase;
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase;
     animation: pulse 1.5s ease-in-out infinite;
   }
 
@@ -348,10 +278,10 @@
     display: none;
     border: 1px solid rgba(200, 134, 10, 0.2);
     border-top: 2px solid var(--amber);
-    padding: 40px 40px 36px;
     margin-bottom: 60px;
     position: relative;
     animation: fadeUp 0.6s ease forwards;
+    overflow: hidden;
   }
 
   .scene-card.visible { display: block; }
@@ -361,7 +291,41 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .scene-card::before {
+  /* ── MOOD IMAGE ── */
+  .scene-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    filter: sepia(40%) brightness(0.6);
+  }
+
+  .scene-image-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 220px;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 8, 5, 0.2) 0%,
+      rgba(10, 8, 5, 0.7) 100%
+    );
+    pointer-events: none;
+  }
+
+  .scene-image-wrapper {
+    position: relative;
+    display: none;
+  }
+
+  .scene-image-wrapper.has-image { display: block; }
+
+  .scene-content {
+    padding: 32px 40px 36px;
+    position: relative;
+  }
+
+  .scene-content::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -399,13 +363,9 @@
 
   .directors-note-list { list-style: none; padding: 0; margin: 0; }
   .directors-note-list li {
-    font-family: 'Crimson Text', serif;
-    font-size: 17px;
-    line-height: 1.55;
-    color: rgba(232, 223, 200, 0.6);
-    padding: 10px 0 10px 20px;
-    border-left: 1px solid rgba(200, 134, 10, 0.15);
-    margin-bottom: 8px;
+    font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.55;
+    color: rgba(232, 223, 200, 0.6); padding: 10px 0 10px 20px;
+    border-left: 1px solid rgba(200, 134, 10, 0.15); margin-bottom: 8px;
   }
   .directors-note-list li:last-child { margin-bottom: 0; }
 
@@ -415,12 +375,11 @@
 
   /* ── VOICEOVER ── */
   .voice-btn {
-    display: flex; align-items: center; gap: 10px;
-    background: transparent; border: 1px solid rgba(200, 134, 10, 0.3);
-    color: rgba(200, 134, 10, 0.7); font-family: 'Space Mono', monospace;
-    font-size: 9px; letter-spacing: 0.25em; padding: 10px 18px;
-    cursor: pointer; text-transform: uppercase; transition: all 0.2s;
-    margin-top: 20px; border-radius: 2px;
+    display: flex; align-items: center; gap: 10px; background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.7);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+    padding: 10px 18px; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s; margin-top: 20px; border-radius: 2px;
   }
 
   .voice-btn:hover { border-color: var(--amber); color: var(--amber); }
@@ -435,22 +394,19 @@
   .reflection-sublabel { font-family: 'Crimson Text', serif; font-size: 14px; font-style: italic; color: rgba(232, 223, 200, 0.3); margin-bottom: 12px; }
 
   .reflection-textarea {
-    width: 100%; background: rgba(255,255,255,0.015);
-    border: 1px solid rgba(200, 134, 10, 0.12); color: rgba(232, 223, 200, 0.7);
-    font-family: 'Crimson Text', serif; font-size: 17px; font-style: italic;
-    line-height: 1.65; padding: 16px 20px; border-radius: 2px; resize: none;
-    outline: none; min-height: 100px; transition: border-color 0.2s, background 0.2s;
+    width: 100%; background: rgba(255,255,255,0.015); border: 1px solid rgba(200, 134, 10, 0.12);
+    color: rgba(232, 223, 200, 0.7); font-family: 'Crimson Text', serif; font-size: 17px;
+    font-style: italic; line-height: 1.65; padding: 16px 20px; border-radius: 2px;
+    resize: none; outline: none; min-height: 100px; transition: border-color 0.2s, background 0.2s;
   }
 
   .reflection-textarea:focus { border-color: rgba(200, 134, 10, 0.3); background: rgba(255,255,255,0.025); }
   .reflection-textarea::placeholder { color: rgba(232, 223, 200, 0.15); font-style: italic; }
 
   .reflection-save-btn {
-    background: transparent; border: 1px solid rgba(200, 134, 10, 0.2);
-    color: rgba(200, 134, 10, 0.5); font-family: 'Space Mono', monospace;
-    font-size: 9px; letter-spacing: 0.2em; padding: 8px 16px;
-    cursor: pointer; text-transform: uppercase; margin-top: 10px;
-    transition: all 0.2s; border-radius: 2px;
+    background: transparent; border: 1px solid rgba(200, 134, 10, 0.2); color: rgba(200, 134, 10, 0.5);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; padding: 8px 16px;
+    cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: all 0.2s; border-radius: 2px;
   }
 
   .reflection-save-btn:hover { border-color: var(--amber); color: var(--amber); }
@@ -469,9 +425,19 @@
   .reel-count { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.25); letter-spacing: 0.1em; }
   .reel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 
-  .reel-card { border: 1px solid rgba(200, 134, 10, 0.15); padding: 16px 18px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .reel-card { border: 1px solid rgba(200, 134, 10, 0.15); cursor: pointer; transition: border-color 0.2s, background 0.2s; overflow: hidden; }
   .reel-card:hover { border-color: rgba(200, 134, 10, 0.4); background: rgba(200, 134, 10, 0.04); }
   .reel-card.active { border-color: var(--amber); background: rgba(200, 134, 10, 0.06); }
+
+  .reel-card-image {
+    width: 100%; height: 80px; object-fit: cover;
+    filter: sepia(40%) brightness(0.5);
+    display: none;
+  }
+
+  .reel-card-image.visible { display: block; }
+
+  .reel-card-body { padding: 12px 14px; }
   .reel-scene-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; }
   .reel-scene-title { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--parchment); line-height: 1.3; margin-bottom: 6px; }
   .reel-scene-date { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(232, 223, 200, 0.25); }
@@ -569,30 +535,36 @@
 
   <!-- SCENE CARD -->
   <div class="scene-card" id="scene-card">
-    <div class="scene-meta">
-      <span class="scene-num" id="r-scene-num">Scene 001</span>
-      <span class="scene-date" id="r-date"></span>
+    <div class="scene-image-wrapper" id="scene-image-wrapper">
+      <img class="scene-image" id="scene-image" src="" alt="">
+      <div class="scene-image-overlay"></div>
     </div>
-    <h2 class="chapter-title" id="r-chapter"></h2>
-    <p class="story-beat" id="r-beat"></p>
-    <div class="note-block">
-      <div class="note-label">Director's Note</div>
-      <ul class="directors-note-list" id="r-director"></ul>
-    </div>
-    <div class="opportunity-block">
-      <div class="opportunity-label">Hidden Opportunity</div>
-      <p class="opportunity-text" id="r-opportunity"></p>
-    </div>
-    <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
-      <span class="voice-dot"></span>
-      <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
-    </button>
-    <div class="reflection-block">
-      <div class="reflection-label">Your Reflection</div>
-      <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
-      <textarea class="reflection-textarea" id="reflection-input" placeholder="Write back to your scene..." rows="4" oninput="onReflectionInput()"></textarea>
-      <button class="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
-      <div class="reflection-saved" id="reflection-saved">✓ Saved to your reel</div>
+    <div class="scene-content">
+      <div class="scene-meta">
+        <span class="scene-num" id="r-scene-num">Scene 001</span>
+        <span class="scene-date" id="r-date"></span>
+      </div>
+      <h2 class="chapter-title" id="r-chapter"></h2>
+      <p class="story-beat" id="r-beat"></p>
+      <div class="note-block">
+        <div class="note-label">Director's Note</div>
+        <ul class="directors-note-list" id="r-director"></ul>
+      </div>
+      <div class="opportunity-block">
+        <div class="opportunity-label">Hidden Opportunity</div>
+        <p class="opportunity-text" id="r-opportunity"></p>
+      </div>
+      <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
+        <span class="voice-dot"></span>
+        <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
+      </button>
+      <div class="reflection-block">
+        <div class="reflection-label">Your Reflection</div>
+        <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
+        <textarea class="reflection-textarea" id="reflection-input" placeholder="Write back to your scene..." rows="4" oninput="onReflectionInput()"></textarea>
+        <button class="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
+        <div class="reflection-saved" id="reflection-saved">✓ Saved to your reel</div>
+      </div>
     </div>
   </div>
 
@@ -654,11 +626,11 @@
   function updateCharCount() {
     const val = document.getElementById('journal-input').value.length;
     const el = document.getElementById('char-count');
-    el.textContent = val + ' / 2000';
     if (val > 0 && val < MIN_CHARS) {
       el.textContent = val + ' / 2000 — keep writing...';
       el.classList.add('too-short');
     } else {
+      el.textContent = val + ' / 2000';
       el.classList.remove('too-short');
     }
   }
@@ -792,8 +764,18 @@
     document.getElementById('r-opportunity').textContent = entry.opportunity || '';
     document.getElementById('reflection-input').value = entry.reflection || '';
     document.getElementById('reflection-saved').classList.remove('visible');
-    document.getElementById('scene-card').classList.add('visible');
 
+    // Handle mood image
+    const imageWrapper = document.getElementById('scene-image-wrapper');
+    const imageEl = document.getElementById('scene-image');
+    if (entry.imageUrl) {
+      imageEl.src = entry.imageUrl;
+      imageWrapper.classList.add('has-image');
+    } else {
+      imageWrapper.classList.remove('has-image');
+    }
+
+    document.getElementById('scene-card').classList.add('visible');
     setTimeout(() => { document.getElementById('scene-card').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
   }
 
@@ -810,9 +792,12 @@
     count.textContent = entries.length + (entries.length === 1 ? ' scene' : ' scenes');
     grid.innerHTML = entries.map((e, i) => `
       <div class="reel-card ${i === 0 ? 'active' : ''}" onclick="showScene(entries[${i}])">
-        <div class="reel-scene-num">Scene ${String(e.sceneNum).padStart(3,'0')}</div>
-        <div class="reel-scene-title">${e.chapter_title || 'Untitled Scene'}</div>
-        <div class="reel-scene-date">${e.date}</div>
+        ${e.imageUrl ? `<img class="reel-card-image visible" src="${e.imageUrl}" alt="">` : ''}
+        <div class="reel-card-body">
+          <div class="reel-scene-num">Scene ${String(e.sceneNum).padStart(3,'0')}</div>
+          <div class="reel-scene-title">${e.chapter_title || 'Untitled Scene'}</div>
+          <div class="reel-scene-date">${e.date}</div>
+        </div>
       </div>
     `).join('');
   }
