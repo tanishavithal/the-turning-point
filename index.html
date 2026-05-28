@@ -297,7 +297,6 @@
     height: 220px;
     object-fit: cover;
     display: block;
-    position: relative;
     filter: sepia(40%) brightness(0.6);
   }
 
@@ -305,11 +304,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 220px;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 8, 5, 0.2) 0%,
-      rgba(10, 8, 5, 0.7) 100%
-    );
+    background: linear-gradient(to bottom, rgba(10, 8, 5, 0.2) 0%, rgba(10, 8, 5, 0.7) 100%);
     pointer-events: none;
   }
 
@@ -353,10 +348,25 @@
     font-style: italic;
     line-height: 1.7;
     color: rgba(232, 223, 200, 0.75);
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     padding-left: 20px;
     border-left: 2px solid rgba(200, 134, 10, 0.3);
   }
+
+  /* ── VOICEOVER — now sits between story beat and director's note ── */
+  .voice-btn {
+    display: flex; align-items: center; gap: 10px; background: transparent;
+    border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.7);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+    padding: 10px 18px; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s; margin-bottom: 32px; border-radius: 2px;
+  }
+
+  .voice-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .voice-btn.playing { border-color: var(--amber); color: var(--amber); background: rgba(200, 134, 10, 0.05); }
+  .voice-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
+  .voice-btn.playing .voice-dot { animation: blink 0.8s ease-in-out infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
   .note-block { margin-bottom: 24px; }
   .note-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.6); text-transform: uppercase; margin-bottom: 12px; }
@@ -372,21 +382,6 @@
   .opportunity-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(200, 134, 10, 0.15); }
   .opportunity-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.6); text-transform: uppercase; margin-bottom: 10px; }
   .opportunity-text { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--amber-bright); text-transform: uppercase; line-height: 1.6; }
-
-  /* ── VOICEOVER ── */
-  .voice-btn {
-    display: flex; align-items: center; gap: 10px; background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.7);
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
-    padding: 10px 18px; cursor: pointer; text-transform: uppercase;
-    transition: all 0.2s; margin-top: 20px; border-radius: 2px;
-  }
-
-  .voice-btn:hover { border-color: var(--amber); color: var(--amber); }
-  .voice-btn.playing { border-color: var(--amber); color: var(--amber); background: rgba(200, 134, 10, 0.05); }
-  .voice-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
-  .voice-btn.playing .voice-dot { animation: blink 0.8s ease-in-out infinite; }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
   /* ── REFLECTION ── */
   .reflection-block { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(200, 134, 10, 0.12); }
@@ -428,15 +423,8 @@
   .reel-card { border: 1px solid rgba(200, 134, 10, 0.15); cursor: pointer; transition: border-color 0.2s, background 0.2s; overflow: hidden; }
   .reel-card:hover { border-color: rgba(200, 134, 10, 0.4); background: rgba(200, 134, 10, 0.04); }
   .reel-card.active { border-color: var(--amber); background: rgba(200, 134, 10, 0.06); }
-
-  .reel-card-image {
-    width: 100%; height: 80px; object-fit: cover;
-    filter: sepia(40%) brightness(0.5);
-    display: none;
-  }
-
+  .reel-card-image { width: 100%; height: 80px; object-fit: cover; filter: sepia(40%) brightness(0.5); display: none; }
   .reel-card-image.visible { display: block; }
-
   .reel-card-body { padding: 12px 14px; }
   .reel-scene-num { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; }
   .reel-scene-title { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--parchment); line-height: 1.3; margin-bottom: 6px; }
@@ -546,6 +534,13 @@
       </div>
       <h2 class="chapter-title" id="r-chapter"></h2>
       <p class="story-beat" id="r-beat"></p>
+
+      <!-- VOICEOVER — sits right after story beat -->
+      <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
+        <span class="voice-dot"></span>
+        <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
+      </button>
+
       <div class="note-block">
         <div class="note-label">Director's Note</div>
         <ul class="directors-note-list" id="r-director"></ul>
@@ -554,10 +549,6 @@
         <div class="opportunity-label">Hidden Opportunity</div>
         <p class="opportunity-text" id="r-opportunity"></p>
       </div>
-      <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
-        <span class="voice-dot"></span>
-        <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
-      </button>
       <div class="reflection-block">
         <div class="reflection-label">Your Reflection</div>
         <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
@@ -765,7 +756,6 @@
     document.getElementById('reflection-input').value = entry.reflection || '';
     document.getElementById('reflection-saved').classList.remove('visible');
 
-    // Handle mood image
     const imageWrapper = document.getElementById('scene-image-wrapper');
     const imageEl = document.getElementById('scene-image');
     if (entry.imageUrl) {
