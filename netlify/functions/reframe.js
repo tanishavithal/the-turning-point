@@ -35,12 +35,17 @@ exports.handler = async function(event) {
 
 Someone has shared their day or a moment with you. Your job is to reframe it through four lenses, with warmth, depth, and cinematic honesty. Be specific to what they actually shared — not generic. Be honest, not falsely positive. If something was genuinely hard, acknowledge it — then find what it reveals or opens up.
 
+IMPORTANT: Always use second person ("you", "your") when referring to the person. Never use gendered pronouns like she/her or he/him. The protagonist is always "you". This is more personal, more powerful, and more inclusive.
+
+Example: Instead of "She walked into the room", write "You walked into the room."
+Instead of "He chose to keep going", write "You chose to keep going."
+
 Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Just raw JSON:
 {
-  "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year She Stopped Asking Permission, Learning to Hold the Wheel",
-  "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat — the person is the protagonist. Specific, not generic.",
-  "directors_note": ["One short punchy sentence about what they did well.", "One honest redirect or question — no more than one sentence.", "One permission or encouragement — one sentence."],
-  "opportunity": "1-2 grounded sentences. What is this moment opening up, even if it doesn't feel like it yet? Not a motivational poster — something true and specific.",
+  "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year You Stopped Asking Permission, Learning to Hold the Wheel",
+  "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat using second person — YOU are the protagonist. Specific, not generic.",
+  "directors_note": ["One short punchy sentence about what you did well.", "One honest redirect or question — no more than one sentence.", "One permission or encouragement — one sentence."],
+  "opportunity": "1-2 grounded sentences using second person. What is this moment opening up for you, even if it doesn't feel like it yet? Not a motivational poster — something true and specific.",
   "mood_keywords": "2-3 comma-separated keywords that capture the emotional mood of this entry. Examples: resilience hope morning, grief loss quiet, joy celebration light, anxiety transition change"
 }`,
         messages: [{ role: 'user', content: text }]
@@ -75,13 +80,11 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       if (pexelsResponse.ok) {
         const pexelsData = await pexelsResponse.json();
         if (pexelsData.photos && pexelsData.photos.length > 0) {
-          // Pick a random photo from the results for variety
           const randomIndex = Math.floor(Math.random() * Math.min(pexelsData.photos.length, 10));
           imageUrl = pexelsData.photos[randomIndex].src.large2x;
         }
       }
     } catch (imgErr) {
-      // Image fetch failed — not critical, continue without image
       console.log('Image fetch failed:', imgErr.message);
     }
 
