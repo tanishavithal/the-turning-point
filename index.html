@@ -698,30 +698,49 @@
     }
   }
 
-  let speechSynth = window.speechSynthesis;
   let isSpeaking = false;
   let currentEntry = null;
+  let currentAudio = null;
 
   function toggleVoice() {
-    if (isSpeaking) { speechSynth.cancel(); setVoiceState(false); return; }
+    if (isSpeaking && currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      setVoiceState(false);
+      return;
+    }
+
     if (!currentEntry) return;
 
+    // Use ElevenLabs audio if available
+    if (currentEntry.audioBase64) {
+      const audioData = 'data:audio/mpeg;base64,' + currentEntry.audioBase64;
+      currentAudio = new Audio(audioData);
+      currentAudio.onplay = () => setVoiceState(true);
+      currentAudio.onended = () => setVoiceState(false);
+      currentAudio.onerror = () => {
+        setVoiceState(false);
+        fallbackToSpeechSynth();
+      };
+      currentAudio.play();
+    } else {
+      // Fallback to browser speech if no ElevenLabs audio
+      fallbackToSpeechSynth();
+    }
+  }
+
+  function fallbackToSpeechSynth() {
+    if (!currentEntry) return;
+    const synth = window.speechSynthesis;
     const dirNote = Array.isArray(currentEntry.directors_note)
-      ? currentEntry.directors_note.join(' ... ')
+      ? currentEntry.directors_note.join(' ')
       : currentEntry.directors_note;
-
-    const script = [currentEntry.chapter_title + '.', currentEntry.story_beat, "Director's note. " + dirNote, "The hidden opportunity. " + currentEntry.opportunity].join(' ... ');
+    const script = [currentEntry.chapter_title + '.', currentEntry.story_beat, "Director's note. " + dirNote, "The hidden opportunity. " + currentEntry.opportunity].join(' ');
     const utterance = new SpeechSynthesisUtterance(script);
-    utterance.rate = 0.88; utterance.pitch = 0.95; utterance.volume = 1;
-
-    const voices = speechSynth.getVoices();
-    const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Moira') || v.name.includes('Female') || (v.lang === 'en-AU') || (v.lang === 'en-GB' && v.name.includes('Female'))) || voices.find(v => v.lang.startsWith('en'));
-    if (preferred) utterance.voice = preferred;
-
+    utterance.rate = 0.88; utterance.pitch = 0.95;
     utterance.onstart = () => setVoiceState(true);
     utterance.onend = () => setVoiceState(false);
-    utterance.onerror = () => setVoiceState(false);
-    speechSynth.speak(utterance);
+    synth.speak(utterance);
   }
 
   function setVoiceState(playing) {
