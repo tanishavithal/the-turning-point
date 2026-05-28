@@ -20,7 +20,7 @@ exports.handler = async function(event) {
       };
     }
 
-    // Call Claude for reframing
+    // ── STEP 1: Call Claude for reframing ──
     const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -68,7 +68,7 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       else throw new Error('Could not parse AI response');
     }
 
-    // Fetch mood image from Pexels
+    // ── STEP 2: Fetch mood image from Pexels ──
     let imageUrl = null;
     try {
       const keywords = result.mood_keywords || 'cinematic life journey';
@@ -88,10 +88,53 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
       console.log('Image fetch failed:', imgErr.message);
     }
 
+    // ── STEP 3: Generate narration with ElevenLabs ──
+    // Build the narration script from the scene
+    let audioBase64 = null;
+    try {
+      const directorNotes = Array.isArray(result.directors_note)
+        ? result.directors_note.join(' ')
+        : result.directors_note;
+
+      const narrationScript = `${result.chapter_title}. ${result.story_beat} Director's note. ${directorNotes} The hidden opportunity. ${result.opportunity}`;
+
+      const voiceId = '21m00Tcm4TlvDq8ikWAM'; // Rachel — warm, cinematic
+
+      const elevenResponse = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'xi-api-key': process.env.ELEVENLABS_API_KEY
+          },
+          body: JSON.stringify({
+            text: narrationScript,
+            model_id: 'eleven_multilingual_v2',
+            voice_settings: {
+              stability: 0.5,
+              similarity_boost: 0.8,
+              style: 0.3,
+              use_speaker_boost: true
+            }
+          })
+        }
+      );
+
+      if (elevenResponse.ok) {
+        const audioBuffer = await elevenResponse.arrayBuffer();
+        audioBase64 = Buffer.from(audioBuffer).toString('base64');
+      } else {
+        console.log('ElevenLabs error:', elevenResponse.status);
+      }
+    } catch (audioErr) {
+      console.log('Audio generation failed:', audioErr.message);
+    }
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ ...result, imageUrl })
+      body: JSON.stringify({ ...result, imageUrl, audioBase64 })
     };
 
   } catch (err) {
