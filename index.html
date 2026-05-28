@@ -701,37 +701,37 @@
   let isSpeaking = false;
   let currentEntry = null;
   let currentAudio = null;
+  let speechSynth = window.speechSynthesis;
 
   function toggleVoice() {
-    if (isSpeaking && currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+    if (isSpeaking) {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+      speechSynth.cancel();
       setVoiceState(false);
       return;
     }
 
     if (!currentEntry) return;
 
-    // Use ElevenLabs audio if available
     if (currentEntry.audioBase64) {
       const audioData = 'data:audio/mpeg;base64,' + currentEntry.audioBase64;
       currentAudio = new Audio(audioData);
       currentAudio.onplay = () => setVoiceState(true);
-      currentAudio.onended = () => setVoiceState(false);
-      currentAudio.onerror = () => {
-        setVoiceState(false);
-        fallbackToSpeechSynth();
-      };
+      currentAudio.onended = () => { setVoiceState(false); currentAudio = null; };
+      currentAudio.onerror = () => { setVoiceState(false); currentAudio = null; fallbackToSpeechSynth(); };
       currentAudio.play();
     } else {
-      // Fallback to browser speech if no ElevenLabs audio
       fallbackToSpeechSynth();
     }
   }
 
   function fallbackToSpeechSynth() {
     if (!currentEntry) return;
-    const synth = window.speechSynthesis;
+    speechSynth.cancel();
     const dirNote = Array.isArray(currentEntry.directors_note)
       ? currentEntry.directors_note.join(' ')
       : currentEntry.directors_note;
@@ -740,7 +740,8 @@
     utterance.rate = 0.88; utterance.pitch = 0.95;
     utterance.onstart = () => setVoiceState(true);
     utterance.onend = () => setVoiceState(false);
-    synth.speak(utterance);
+    utterance.onerror = () => setVoiceState(false);
+    speechSynth.speak(utterance);
   }
 
   function setVoiceState(playing) {
