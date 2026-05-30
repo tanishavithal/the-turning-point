@@ -379,10 +379,42 @@
 
   .note-sublabel { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.3); margin-bottom: 12px; }
 
-  /* Original input */
-  .original-input-block { margin-bottom: 28px; padding: 16px 20px; border: 1px solid rgba(200, 134, 10, 0.08); border-radius: 2px; background: rgba(255,255,255,0.01); }
-  .original-input-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.3); text-transform: uppercase; margin-bottom: 8px; }
-  .original-input-text { font-family: 'Crimson Text', serif; font-size: 15px; line-height: 1.6; color: rgba(232, 223, 200, 0.35); font-style: italic; }
+  /* Original input toggle */
+  .original-input-block { margin-bottom: 28px; }
+
+  .original-input-toggle {
+    background: transparent;
+    border: none;
+    color: rgba(200, 134, 10, 0.4);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+  }
+
+  .original-input-toggle:hover { color: rgba(200, 134, 10, 0.7); }
+
+  .original-input-content {
+    display: none;
+    margin-top: 16px;
+    padding: 20px 24px;
+    border: 1px solid rgba(200, 134, 10, 0.1);
+    border-radius: 2px;
+    background: rgba(255,255,255,0.015);
+  }
+
+  .original-input-content.visible { display: block; }
+
+  .original-input-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(232, 223, 200, 0.5);
+    font-style: italic;
+  }
 
   .directors-note-list { list-style: none; padding: 0; margin: 0; }
   .directors-note-list li {
@@ -547,9 +579,13 @@
       </div>
       <h2 class="chapter-title" id="r-chapter"></h2>
       <p class="story-beat" id="r-beat"></p>
-      <div class="original-input-block" id="original-input-block">
-        <div class="original-input-label">What you wrote</div>
-        <p class="original-input-text" id="r-input"></p>
+      <div class="original-input-block">
+        <button class="original-input-toggle" id="original-input-toggle" onclick="toggleOriginalInput()">
+          <span>▸ &nbsp; See what you wrote</span>
+        </button>
+        <div class="original-input-content" id="original-input-content">
+          <p class="original-input-text" id="r-input"></p>
+        </div>
       </div>
 
       <!-- VOICEOVER — right-aligned, breathing room -->
@@ -764,6 +800,15 @@
 
   let currentEntryId = null;
 
+  function toggleOriginalInput() {
+    const content = document.getElementById('original-input-content');
+    const toggle = document.getElementById('original-input-toggle');
+    const isVisible = content.classList.toggle('visible');
+    toggle.innerHTML = isVisible
+      ? '<span>▾ &nbsp; Hide what you wrote</span>'
+      : '<span>▸ &nbsp; See what you wrote</span>';
+  }
+
   function onReflectionInput() { document.getElementById('reflection-saved').classList.remove('visible'); }
 
   function saveReflection() {
@@ -787,6 +832,8 @@
     document.getElementById('r-chapter').textContent = entry.chapter_title || '';
     document.getElementById('r-beat').textContent = entry.story_beat || '';
     document.getElementById('r-input').textContent = entry.inputText || '';
+    document.getElementById('original-input-content').classList.remove('visible');
+    document.getElementById('original-input-toggle').innerHTML = '<span>▸ &nbsp; See what you wrote</span>';
 
     const notes = Array.isArray(entry.directors_note)
       ? entry.directors_note
