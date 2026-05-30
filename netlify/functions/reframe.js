@@ -52,7 +52,7 @@ Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. J
 {
   "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year You Stopped Asking Permission, Learning to Hold the Wheel",
   "story_beat": "2-3 sentences. Cinematic, specific, second person. Capture the texture of what actually happened — not a generic arc.",
-  "directors_note": ["2 warm, specific sentences about what they did well and why it matters. Substantive but not exhausting.", "2 honest sentences with a question or redirect — something they haven't already answered. Make it land without over-explaining.", "2 warm sentences of permission or encouragement — specific to them, genuinely felt."],
+  "directors_note": ["EXACTLY 2 sentences. First: what they did well and why it matters. Second: why that's significant. Warm and specific.", "EXACTLY 2 sentences. An honest question or redirect they haven't already answered. Don't over-explain — just ask it well.", "EXACTLY 2 sentences. Permission or encouragement specific to them. End with something that feels like relief, not pressure."],
   "opportunity": "2 plain, warm sentences about what this moment is opening up. Specific to what they shared. End with one genuine question worth sitting with.",
   "mood_keywords": "2-3 comma-separated keywords that capture the emotional mood of this entry. Examples: resilience hope morning, grief loss quiet, joy celebration light, anxiety transition change"
 }`,
