@@ -1,31 +1,34 @@
-exports.handler = async function(event) {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
-  };
+  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+  if (!ANTHROPIC_API_KEY) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Reframing engine not configured.' })
+    };
+  }
+
+  let body;
+  try {
+    body = JSON.parse(event.body);
+  } catch {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body.' }) };
+  }
+
+  const { text } = body;
+  if (!text || text.trim().length < 50) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Entry too short to reframe.' }) };
+  }
 
   try {
-    const { text } = JSON.parse(event.body);
-
-    if (!text || text.trim().length < 50) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'Entry too short — keep writing...' })
-      };
-    }
-
-    // ── STEP 1: Call Claude for reframing ──
-    const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
@@ -33,123 +36,64 @@ exports.handler = async function(event) {
         max_tokens: 1024,
         system: `You are the creative director of "The Turning Point" — a cinematic journaling experience that helps people see themselves as the protagonist of their own story, not a passive victim of circumstance.
 
-Someone has shared their day or a moment with you. Your job is to reframe it through four lenses. Be specific to what they actually shared — not generic. Be honest, not falsely positive. If something was genuinely hard, acknowledge it — then find what it reveals or opens up.
+Someone has shared their day or a moment with you. Your job is to reframe it through four lenses, with warmth, depth, and cinematic honesty. Be specific to what they actually shared — not generic. Be honest, not falsely positive. If something was genuinely hard, acknowledge it — then find what it reveals or opens up.
 
-TONE: Warm, clear, and substantive. Like a trusted friend who is also genuinely insightful — not a life coach, not a therapist, not a press release. Conversational but with real depth. Don't be thin or surface-level. Give the person something to actually think about. One strong image is better than five layered metaphors, but don't sacrifice substance for simplicity.
-
-PRONOUNS: Always use second person ("you", "your"). Never use gendered pronouns like she/her or he/him. The protagonist is always "you".
-
-DIRECTOR'S NOTE: Three observations — each one should be a full, rich thought (2-3 sentences each). Not bullet points, not one-liners. Each does one job:
-- First: name something specific they did well and explain WHY it matters — don't just name it, unpack it a little
-- Second: one honest question or redirect that genuinely challenges them — read what they wrote carefully and make sure this isn't something they've already answered. Push somewhere they haven't gone yet.
-- Third: one clear permission or encouragement with real warmth behind it — something that feels like it was written specifically for them, not generic praise
-
-HIDDEN OPPORTUNITY: 2-3 warm, plain sentences. What is this moment opening up? Be specific to what they shared. End with one forward-looking question that invites them to think further — not rhetorical, but something genuinely worth sitting with.
-
-STORY BEAT: Cinematic and specific. Capture what actually happened with real texture. Don't flatten it into a generic arc.
+The Director's Note should sound like a trusted friend over coffee — warm, direct, conversational. Not a life coach. Not a press release. One strong observation per sentence, no metaphor stacking.
 
 Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Just raw JSON:
 {
-  "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year You Stopped Asking Permission, Learning to Hold the Wheel",
-  "story_beat": "2-3 sentences. Cinematic, specific, second person. Capture the texture of what actually happened — not a generic arc.",
-  "directors_note": ["EXACTLY 2 sentences. First: what they did well and why it matters. Second: why that's significant. Warm and specific.", "EXACTLY 2 sentences. An honest question or redirect they haven't already answered. Don't over-explain — just ask it well.", "EXACTLY 2 sentences. Permission or encouragement specific to them. End with something that feels like relief, not pressure."],
-  "opportunity": "2 plain, warm sentences about what this moment is opening up. Specific to what they shared. End with one genuine question worth sitting with.",
-  "mood_keywords": "2-3 comma-separated keywords that capture the emotional mood of this entry. Examples: resilience hope morning, grief loss quiet, joy celebration light, anxiety transition change"
+  "chapter_title": "A bold, evocative chapter title. 3-8 words. Book-spine quality. Examples: The Year She Stopped Asking Permission, Learning to Hold the Wheel",
+  "story_beat": "2-3 sentences. Describe what happened as a cinematic story beat — the person is the protagonist. Specific, not generic.",
+  "directors_note": "Exactly 3 short sentences separated by newlines. First: what they did well — something specific. Second: one honest redirect or question, direct but not harsh. Third: a permission or encouragement. Each sentence stands alone. Warm, conversational, like a trusted friend.",
+  "opportunity": "1-2 plain sentences. What is this moment opening up, even if it doesn't feel like it yet? No jargon. No motivational poster language. Something true and specific.",
+  "mood_keywords": "2-3 comma-separated words describing the emotional mood and visual atmosphere of this entry. Choose words that would find a beautiful, evocative photo. Examples: solitude,morning,fog — or resilience,city,rain — or warmth,kitchen,light. No abstract concepts — think cinematic visuals."
 }`,
-        messages: [{ role: 'user', content: text }]
+        messages: [{ role: 'user', content: text.trim() }]
       })
     });
 
-    if (!claudeResponse.ok) {
-      const err = await claudeResponse.json();
-      throw new Error(err.error?.message || 'API error ' + claudeResponse.status);
+    if (!response.ok) {
+      const err = await response.json();
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({ error: err.error?.message || 'Reframing engine error.' })
+      };
     }
 
-    const claudeData = await claudeResponse.json();
-    const rawText = claudeData.content[0].text.trim();
+    const data = await response.json();
+    const rawText = data.content[0].text.trim();
 
     let result;
-    try { result = JSON.parse(rawText); }
-    catch {
+    try {
+      result = JSON.parse(rawText);
+    } catch {
       const match = rawText.match(/\{[\s\S]*\}/);
       if (match) result = JSON.parse(match[0]);
-      else throw new Error('Could not parse AI response');
+      else throw new Error('Could not parse AI response.');
     }
 
-    // ── STEP 2: Fetch mood image from Pexels ──
-    let imageUrl = null;
-    try {
-      const keywords = result.mood_keywords || 'cinematic life journey';
-      const pexelsResponse = await fetch(
-        `https://api.pexels.com/v1/search?query=${encodeURIComponent(keywords)}&per_page=15&orientation=landscape`,
-        { headers: { 'Authorization': process.env.PEXELS_API_KEY } }
-      );
-
-      if (pexelsResponse.ok) {
-        const pexelsData = await pexelsResponse.json();
-        if (pexelsData.photos && pexelsData.photos.length > 0) {
-          const randomIndex = Math.floor(Math.random() * Math.min(pexelsData.photos.length, 10));
-          imageUrl = pexelsData.photos[randomIndex].src.large2x;
-        }
-      }
-    } catch (imgErr) {
-      console.log('Image fetch failed:', imgErr.message);
-    }
-
-    // ── STEP 3: Generate narration with ElevenLabs ──
-    // Build the narration script from the scene
-    let audioBase64 = null;
-    try {
-      const directorNotes = Array.isArray(result.directors_note)
-        ? result.directors_note.join(' ')
-        : result.directors_note;
-
-      const narrationScript = `${result.chapter_title}. ${result.story_beat} Director's note. ${directorNotes} The hidden opportunity. ${result.opportunity}`;
-
-      const voiceId = '21m00Tcm4TlvDq8ikWAM'; // Rachel — warm, cinematic
-
-      const elevenResponse = await fetch(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'xi-api-key': process.env.ELEVENLABS_API_KEY
-          },
-          body: JSON.stringify({
-            text: narrationScript,
-            model_id: 'eleven_multilingual_v2',
-            voice_settings: {
-              stability: 0.5,
-              similarity_boost: 0.8,
-              style: 0.3,
-              use_speaker_boost: true
-            }
-          })
-        }
-      );
-
-      if (elevenResponse.ok) {
-        const audioBuffer = await elevenResponse.arrayBuffer();
-        audioBase64 = Buffer.from(audioBuffer).toString('base64');
-      } else {
-        console.log('ElevenLabs error:', elevenResponse.status);
-      }
-    } catch (audioErr) {
-      console.log('Audio generation failed:', audioErr.message);
+    // Build Unsplash URL from mood keywords
+    // Uses the static source URL — free, no API key needed
+    if (result.mood_keywords) {
+      const keywords = result.mood_keywords
+        .split(',')
+        .map(k => k.trim().toLowerCase())
+        .filter(Boolean)
+        .slice(0, 3)
+        .join(',');
+      result.image_url = `https://source.unsplash.com/1200x600/?${encodeURIComponent(keywords)}`;
     }
 
     return {
       statusCode: 200,
-      headers,
-      body: JSON.stringify({ ...result, imageUrl, audioBase64 })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(result)
     };
 
   } catch (err) {
     return {
       statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({ error: err.message || 'Unexpected error.' })
     };
   }
 };
