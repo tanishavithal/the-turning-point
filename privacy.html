@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — The Turning Point</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0805;
+    --parchment: #f5f0e8;
+    --amber: #c8860a;
+    --amber-bright: #e8a020;
+    --cream: #e8dfc8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Crimson Text', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .ambient-glow {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 55%;
+    background: radial-gradient(ellipse, rgba(200, 134, 10, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 52px 0 36px;
+    border-bottom: 1px solid rgba(200, 134, 10, 0.15);
+    margin-bottom: 52px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: rgba(200, 134, 10, 0.4);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    transition: color 0.2s;
+    display: block;
+  }
+
+  .back-link:hover { color: var(--amber); }
+
+  .page-header-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .page-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(200, 134, 10, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--parchment);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .page-subtitle {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(200, 134, 10, 0.65);
+    line-height: 1.4;
+  }
+
+  .page-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: rgba(232, 223, 200, 0.18);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTENT ── */
+  .intro {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.75;
+    color: rgba(232, 223, 200, 0.55);
+    margin-bottom: 52px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(200, 134, 10, 0.25);
+  }
+
+  .section {
+    margin-bottom: 44px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid rgba(200, 134, 10, 0.08);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(200, 134, 10, 0.45);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-body {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(232, 223, 200, 0.58);
+  }
+
+  .section-body p { margin-bottom: 14px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .section-body strong {
+    color: rgba(232, 223, 200, 0.82);
+    font-weight: 600;
+  }
+
+  .highlight-block {
+    background: rgba(200, 134, 10, 0.04);
+    border: 1px solid rgba(200, 134, 10, 0.12);
+    border-left: 2px solid rgba(200, 134, 10, 0.35);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .highlight-block p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(200, 134, 10, 0.7);
+    line-height: 1.65;
+    margin-bottom: 0 !important;
+  }
+
+  .contact-link {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 134, 10, 0.3);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .contact-link:hover {
+    color: var(--amber-bright);
+    border-color: var(--amber-bright);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 0 60px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(200, 134, 10, 0.08);
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(232, 223, 200, 0.12);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .footer-back {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(200, 134, 10, 0.35);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-back:hover { color: var(--amber); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: rgba(200, 134, 10, 0.3); border-radius: 2px; }
+
+  @media (max-width: 480px) {
+    .page-header-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .page-date { padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-glow"></div>
+
+<div class="container">
+
+  <header>
+    <a href="/" class="back-link">← Back to The Turning Point</a>
+    <div class="page-header-inner">
+      <div class="page-title-group">
+        <span class="page-label">The Turning Point</span>
+        <h1 class="page-title">Your story. Your privacy.</h1>
+        <p class="page-subtitle">Plain language, not legal language.</p>
+      </div>
+      <div class="page-date">Last updated<br>June 2026</div>
+    </div>
+  </header>
+
+  <p class="intro">This is a journaling tool built on trust. You write things here that matter. Here is exactly what happens to what you share.</p>
+
+  <!-- WHAT IS STORED -->
+  <div class="section">
+    <div class="section-label">01</div>
+    <h2 class="section-title">What is stored</h2>
+    <div class="section-body">
+      <p>When you sign in and write entries, two things are saved to a secure database:</p>
+      <div class="highlight-block">
+        <p>Your email address — used only to send your magic link sign-in. Nothing else.<br><br>
+        Your journal entries — the text you write, and the scene the AI generates from it (chapter title, story beat, director's note, hidden opportunity, mood keywords, and the Pexels image URL). Also any personal reflection you choose to save.</p>
+      </div>
+      <p>That is everything. No analytics. No tracking pixels. No cookies beyond what's needed to keep you signed in. No device information. No location data.</p>
+      <p>If you use the app without signing in (guest mode), your entries are saved in your browser only and never leave your device.</p>
+    </div>
+  </div>
+
+  <!-- WHERE IT LIVES -->
+  <div class="section">
+    <div class="section-label">02</div>
+    <h2 class="section-title">Where it lives</h2>
+    <div class="section-body">
+      <p>Your entries are stored in <strong>Supabase</strong> — a secure, encrypted database platform based in the United States. Supabase stores data at rest with AES-256 encryption and in transit over HTTPS.</p>
+      <p>Your data is not sold, shared, or provided to any third party. It is not used for advertising. It is not analysed by anyone other than you.</p>
+      <p>The only people who can access your entries are you (via your signed-in account) and the builder of this app (Tanisha Vithal) — and only in the event of a support request or technical issue, never routinely.</p>
+    </div>
+  </div>
+
+  <!-- AI & ANTHROPIC -->
+  <div class="section">
+    <div class="section-label">03</div>
+    <h2 class="section-title">The AI and your entries</h2>
+    <div class="section-body">
+      <p>When you submit a journal entry, it is sent to <strong>Anthropic's API</strong> (the Claude AI) to generate your scene. This is a direct API call — your entry is processed and a response is returned.</p>
+      <div class="highlight-block">
+        <p>Anthropic does not use API inputs to train its models. Your journal entries are not used to improve Claude or any other AI system. This is Anthropic's stated policy for API usage.</p>
+      </div>
+      <p>Mood images are sourced from <strong>Pexels</strong> using 2-3 mood keywords extracted from your entry. The keywords themselves (e.g. "resilience hope morning") are sent to Pexels as a search query — not your full entry text.</p>
+      <p>Voice narration is generated via <strong>ElevenLabs</strong>. Your scene text is sent to ElevenLabs to produce the audio. ElevenLabs' privacy policy applies to this processing.</p>
+    </div>
+  </div>
+
+  <!-- HOW TO DELETE -->
+  <div class="section">
+    <div class="section-label">04</div>
+    <h2 class="section-title">Deleting your data</h2>
+    <div class="section-body">
+      <p>You have the right to delete your data at any time. A self-serve delete option is on the product roadmap — until it is built, deletion is handled directly.</p>
+      <p>To delete your entries or your account entirely, email <a href="mailto:tanisha@theturningpoint.app" class="contact-link">tanisha@theturningpoint.app</a> with the subject line <strong>Delete my data</strong>. Your data will be permanently removed within 7 days and you will receive confirmation when it is done.</p>
+      <p>There is no cost, no process, no questions asked.</p>
+    </div>
+  </div>
+
+  <!-- BETA TESTING NOTE -->
+  <div class="section">
+    <div class="section-label">05</div>
+    <h2 class="section-title">A note for beta testers</h2>
+    <div class="section-body">
+      <p>If you are using this app as a beta tester, thank you. You are using an early version of a product still being refined. A few things worth knowing:</p>
+      <p><strong>Your entries are real and are stored.</strong> Please write about real things if you're comfortable doing so — that produces better feedback — but know that whatever you write is saved to the database as described above.</p>
+      <p><strong>Your feedback may be referenced in development notes</strong> — but never attributed to you by name without your explicit permission, and never shared publicly.</p>
+      <p><strong>Previous versions</strong> of this app stored entries in your browser only (localStorage). Those entries were never transmitted anywhere. They remain in your browser and are not accessible to anyone else.</p>
+      <p>If you have any questions about your data or this testing process, reach out directly at <a href="mailto:tanisha@theturningpoint.app" class="contact-link">tanisha@theturningpoint.app</a>.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>The Turning Point &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; © 2026</p>
+    <a href="/" class="footer-back">← Return to the journal</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
