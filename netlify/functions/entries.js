@@ -1,7 +1,6 @@
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
-// Helper: get user from access token
 async function getUserFromToken(token) {
   const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
     headers: {
@@ -13,7 +12,6 @@ async function getUserFromToken(token) {
   return res.json();
 }
 
-// Helper: Supabase REST call
 async function supabase(method, path, body, token) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     method,
@@ -36,7 +34,6 @@ async function supabase(method, path, body, token) {
 }
 
 exports.handler = async (event) => {
-  // Auth check — all entry routes require a valid session
   const authHeader = event.headers.authorization || event.headers.Authorization;
   const token = authHeader?.replace('Bearer ', '');
 
@@ -51,7 +48,6 @@ exports.handler = async (event) => {
 
   const userId = user.id;
 
-  // ── GET ALL ENTRIES ──
   if (event.httpMethod === 'GET') {
     try {
       const entries = await supabase(
@@ -65,6 +61,7 @@ exports.handler = async (event) => {
         body: JSON.stringify(entries || [])
       };
     } catch (err) {
+      console.error('GET entries error:', err.message);
       return { statusCode: 500, body: JSON.stringify({ error: 'Could not load your scenes.' }) };
     }
   }
@@ -77,13 +74,11 @@ exports.handler = async (event) => {
 
     const { action } = body;
 
-    // ── SAVE ENTRY ──
     if (action === 'save_entry') {
       const { entry } = body;
       if (!entry) return { statusCode: 400, body: JSON.stringify({ error: 'Entry data required.' }) };
 
       try {
-        // Get current max scene_num for this user
         const existing = await supabase(
           'GET',
           `entries?user_id=eq.${userId}&select=scene_num&order=scene_num.desc&limit=1`,
@@ -93,36 +88,43 @@ exports.handler = async (event) => {
 
         const nextSceneNum = existing && existing.length > 0 ? existing[0].scene_num + 1 : 1;
 
-        // Format date as the table's text column expects: "12 Jun 2026"
         const dateText = new Date().toLocaleDateString('en-AU', {
           day: 'numeric', month: 'short', year: 'numeric'
         });
 
-        const saved = await supabase('POST', 'entries', {
+        // directors_note arrives as an array — convert to JSON string for the text column
+        const directorsNote = Array.isArray(entry.directors_note)
+          ? JSON.stringify(entry.directors_note)
+          : (entry.directors_note || null);
+
+        // Only send known columns — strip audioBase64, id, sceneNum, imageUrl, dbId etc.
+        const payload = {
           user_id: userId,
           scene_num: nextSceneNum,
           date: dateText,
-          input_text: entry.inputText,
-          chapter_title: entry.chapter_title,
-          story_beat: entry.story_beat,
-          directors_note: entry.directors_note,
-          opportunity: entry.opportunity,
+          input_text: entry.inputText || null,
+          chapter_title: entry.chapter_title || null,
+          story_beat: entry.story_beat || null,
+          directors_note: directorsNote,
+          opportunity: entry.opportunity || null,
           mood_keywords: entry.mood_keywords || null,
-          image_url: entry.image_url || null,
+          image_url: entry.image_url || entry.imageUrl || null,
           reflection: entry.reflection || null,
           created_at: new Date().toISOString()
-        }, SUPABASE_SERVICE_KEY);
+        };
+
+        const saved = await supabase('POST', 'entries', payload, SUPABASE_SERVICE_KEY);
 
         return {
           statusCode: 200,
           body: JSON.stringify(Array.isArray(saved) ? saved[0] : saved)
         };
       } catch (err) {
-        return { statusCode: 500, body: JSON.stringify({ error: 'Could not save scene.' }) };
+        console.error('save_entry error:', err.message);
+        return { statusCode: 500, body: JSON.stringify({ error: 'Could not save scene: ' + err.message }) };
       }
     }
 
-    // ── UPDATE REFLECTION ──
     if (action === 'update_reflection') {
       const { entry_id, reflection } = body;
       if (!entry_id) return { statusCode: 400, body: JSON.stringify({ error: 'Entry ID required.' }) };
@@ -136,6 +138,7 @@ exports.handler = async (event) => {
         );
         return { statusCode: 200, body: JSON.stringify({ updated: true }) };
       } catch (err) {
+        console.error('update_reflection error:', err.message);
         return { statusCode: 500, body: JSON.stringify({ error: 'Could not save reflection.' }) };
       }
     }
