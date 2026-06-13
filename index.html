@@ -864,7 +864,8 @@ async function loadEntriesFromDB() {
       date: e.date || new Date(e.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }),
       inputText: e.input_text,
       chapter_title: e.chapter_title, story_beat: e.story_beat,
-      directors_note: e.directors_note, opportunity: e.opportunity,
+      directors_note: (() => { try { const p = JSON.parse(e.directors_note); return Array.isArray(p) ? p : e.directors_note; } catch { return e.directors_note; } })(),
+      opportunity: e.opportunity,
       mood_keywords: e.mood_keywords || null,
       imageUrl: e.image_url || null,
       reflection: e.reflection
