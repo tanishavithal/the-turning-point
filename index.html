@@ -45,222 +45,52 @@
     50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
   }
 
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 24px;
-    position: relative;
-    z-index: 2;
-  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
   /* ── HEADER ── */
-  header {
-    padding: 60px 0 40px;
-    text-align: center;
-    border-bottom: 1px solid rgba(200, 134, 10, 0.2);
-    margin-bottom: 60px;
-    position: relative;
-  }
+  header { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid rgba(200, 134, 10, 0.2); margin-bottom: 60px; position: relative; }
 
-  .auth-bar {
-    position: absolute;
-    top: 20px;
-    right: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .auth-user-email {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: rgba(200, 134, 10, 0.5);
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .auth-signout-btn {
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.2);
-    color: rgba(200, 134, 10, 0.45);
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.15em;
-    padding: 5px 10px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.2s;
-    border-radius: 2px;
-  }
-
+  .auth-bar { position: absolute; top: 20px; right: 0; display: flex; align-items: center; gap: 12px; }
+  .auth-user-email { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(200, 134, 10, 0.5); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .auth-signout-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.2); color: rgba(200, 134, 10, 0.45); font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; padding: 5px 10px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 2px; }
   .auth-signout-btn:hover { border-color: rgba(200, 134, 10, 0.5); color: rgba(200, 134, 10, 0.8); }
 
-  .brand-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0.8;
-  }
-
-  .main-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 8vw, 88px);
-    font-weight: 900;
-    line-height: 0.9;
-    color: var(--parchment);
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
-  }
-
+  .brand-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.4em; color: var(--amber); text-transform: uppercase; margin-bottom: 20px; opacity: 0.8; }
+  .main-title { font-family: 'Playfair Display', serif; font-size: clamp(48px, 8vw, 88px); font-weight: 900; line-height: 0.9; color: var(--parchment); margin-bottom: 24px; letter-spacing: -0.02em; }
   .main-title em { font-style: italic; color: var(--amber); }
-
-  .tagline {
-    font-family: 'Crimson Text', serif;
-    font-size: 18px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.6);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
+  .tagline { font-family: 'Crimson Text', serif; font-size: 18px; font-style: italic; color: rgba(232, 223, 200, 0.6); max-width: 480px; margin: 0 auto; line-height: 1.6; }
 
   /* ── AUTH SECTION ── */
-  .auth-section {
-    background: rgba(200, 134, 10, 0.05);
-    border: 1px solid rgba(200, 134, 10, 0.2);
-    border-top: 2px solid rgba(200, 134, 10, 0.4);
-    padding: 32px 36px;
-    margin-bottom: 52px;
-    animation: fadeUp 0.4s ease forwards;
-  }
-
+  .auth-section { background: rgba(200, 134, 10, 0.05); border: 1px solid rgba(200, 134, 10, 0.2); border-top: 2px solid rgba(200, 134, 10, 0.4); padding: 32px 36px; margin-bottom: 52px; animation: fadeUp 0.4s ease forwards; }
   .auth-section.hidden { display: none; }
-
-  .auth-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    opacity: 0.8;
-  }
-
-  .auth-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--parchment);
-    margin-bottom: 8px;
-  }
-
-  .auth-desc {
-    font-family: 'Crimson Text', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.45);
-    margin-bottom: 24px;
-    line-height: 1.5;
-  }
-
+  .auth-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.4em; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; opacity: 0.8; }
+  .auth-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--parchment); margin-bottom: 8px; }
+  .auth-desc { font-family: 'Crimson Text', serif; font-size: 16px; font-style: italic; color: rgba(232, 223, 200, 0.45); margin-bottom: 24px; line-height: 1.5; }
   .auth-step { display: none; }
   .auth-step.active { display: block; }
-
   .auth-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
-
-  .auth-input {
-    flex: 1;
-    min-width: 200px;
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(200, 134, 10, 0.25);
-    color: var(--cream);
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    padding: 13px 16px;
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
+  .auth-input { flex: 1; min-width: 200px; background: rgba(0,0,0,0.35); border: 1px solid rgba(200, 134, 10, 0.25); color: var(--cream); font-family: 'Space Mono', monospace; font-size: 12px; padding: 13px 16px; border-radius: 2px; outline: none; transition: border-color 0.2s; }
   .auth-input:focus { border-color: var(--amber); }
   .auth-input::placeholder { color: rgba(232, 223, 200, 0.2); }
-
-  .auth-btn {
-    background: var(--amber);
-    color: var(--ink);
-    border: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    padding: 13px 22px;
-    cursor: pointer;
-    border-radius: 2px;
-    text-transform: uppercase;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
+  .auth-btn { background: var(--amber); color: var(--ink); border: none; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; padding: 13px 22px; cursor: pointer; border-radius: 2px; text-transform: uppercase; transition: background 0.2s; white-space: nowrap; }
   .auth-btn:hover { background: var(--amber-bright); }
   .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  .auth-status {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    margin-top: 12px;
-    padding: 9px 13px;
-    border-radius: 2px;
-    display: none;
-    letter-spacing: 0.05em;
-  }
-
+  .auth-status { font-family: 'Space Mono', monospace; font-size: 10px; margin-top: 12px; padding: 9px 13px; border-radius: 2px; display: none; letter-spacing: 0.05em; }
   .auth-status.visible { display: block; }
   .auth-status.success { background: rgba(100, 180, 100, 0.08); border: 1px solid rgba(100, 180, 100, 0.25); color: #90d090; }
   .auth-status.error { background: rgba(180, 80, 80, 0.08); border: 1px solid rgba(180, 80, 80, 0.25); color: #d09090; }
   .auth-status.info { background: rgba(200, 134, 10, 0.06); border: 1px solid rgba(200, 134, 10, 0.2); color: rgba(200, 134, 10, 0.8); }
-
   .auth-sent-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--parchment); margin-bottom: 10px; }
   .auth-sent-desc { font-family: 'Crimson Text', serif; font-size: 16px; font-style: italic; color: rgba(232, 223, 200, 0.5); line-height: 1.6; margin-bottom: 16px; }
-
-  .auth-resend-link {
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
-    color: rgba(200, 134, 10, 0.5); cursor: pointer; text-decoration: none;
-    text-transform: uppercase; border-bottom: 1px solid rgba(200, 134, 10, 0.2);
-    padding-bottom: 1px; transition: color 0.2s;
-  }
+  .auth-resend-link { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(200, 134, 10, 0.5); cursor: pointer; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(200, 134, 10, 0.2); padding-bottom: 1px; transition: color 0.2s; }
   .auth-resend-link:hover { color: var(--amber); }
-
-  .auth-guest-link {
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
-    color: rgba(232, 223, 200, 0.2); cursor: pointer; text-decoration: none;
-    text-transform: uppercase; border-bottom: 1px solid rgba(232, 223, 200, 0.1);
-    padding-bottom: 1px; margin-top: 16px; display: inline-block; transition: color 0.2s;
-  }
+  .auth-guest-link { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(232, 223, 200, 0.2); cursor: pointer; text-decoration: none; text-transform: uppercase; border-bottom: 1px solid rgba(232, 223, 200, 0.1); padding-bottom: 1px; margin-top: 16px; display: inline-block; transition: color 0.2s; }
   .auth-guest-link:hover { color: rgba(232, 223, 200, 0.4); }
 
-  .guest-notice {
-    display: none;
-    background: rgba(200, 134, 10, 0.04);
-    border: 1px solid rgba(200, 134, 10, 0.15);
-    padding: 14px 18px;
-    margin-bottom: 32px;
-    border-radius: 2px;
-  }
-
+  .guest-notice { display: none; background: rgba(200, 134, 10, 0.04); border: 1px solid rgba(200, 134, 10, 0.15); padding: 14px 18px; margin-bottom: 32px; border-radius: 2px; }
   .guest-notice.visible { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .guest-notice-text { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; }
-
-  .guest-signin-btn {
-    background: transparent; border: 1px solid rgba(200, 134, 10, 0.3);
-    color: rgba(200, 134, 10, 0.6); font-family: 'Space Mono', monospace;
-    font-size: 9px; letter-spacing: 0.12em; padding: 7px 14px;
-    cursor: pointer; text-transform: uppercase; border-radius: 2px;
-    transition: all 0.2s; white-space: nowrap;
-  }
+  .guest-signin-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.6); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; padding: 7px 14px; cursor: pointer; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; white-space: nowrap; }
   .guest-signin-btn:hover { border-color: var(--amber); color: var(--amber); }
 
   /* ── JOURNAL INPUT ── */
@@ -268,45 +98,20 @@
   .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; }
   .scene-counter { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; }
   .date-stamp { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.3); letter-spacing: 0.1em; margin-left: auto; }
-
-  .journal-textarea {
-    width: 100%; background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(200, 134, 10, 0.2); border-top: 2px solid rgba(200, 134, 10, 0.4);
-    color: var(--cream); font-family: 'Crimson Text', serif; font-size: 20px;
-    line-height: 1.7; padding: 28px 32px; border-radius: 0 0 2px 2px;
-    resize: none; outline: none; min-height: 180px; transition: border-color 0.3s;
-  }
-
+  .journal-textarea { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(200, 134, 10, 0.2); border-top: 2px solid rgba(200, 134, 10, 0.4); color: var(--cream); font-family: 'Crimson Text', serif; font-size: 20px; line-height: 1.7; padding: 28px 32px; border-radius: 0 0 2px 2px; resize: none; outline: none; min-height: 180px; transition: border-color 0.3s; }
   .journal-textarea:focus { border-color: rgba(200, 134, 10, 0.5); background: rgba(255,255,255,0.03); }
   .journal-textarea::placeholder { color: rgba(232, 223, 200, 0.2); font-style: italic; }
-
   .journal-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; gap: 10px; }
   .char-count { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.25); letter-spacing: 0.1em; }
   .char-count.too-short { color: rgba(200, 134, 10, 0.5); }
-
-  .roll-btn {
-    background: transparent; border: 1px solid var(--amber); color: var(--amber);
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.25em;
-    padding: 14px 32px; cursor: pointer; text-transform: uppercase;
-    transition: all 0.3s; position: relative; overflow: hidden;
-  }
-
-  .roll-btn::before {
-    content: ''; position: absolute; inset: 0; background: var(--amber);
-    transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1;
-  }
-
+  .roll-btn { background: transparent; border: 1px solid var(--amber); color: var(--amber); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.25em; padding: 14px 32px; cursor: pointer; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
+  .roll-btn::before { content: ''; position: absolute; inset: 0; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1; }
   .roll-btn:hover:not(:disabled) { color: var(--ink); }
   .roll-btn:hover:not(:disabled)::before { transform: scaleX(1); }
   .roll-btn:disabled { opacity: 0.35; cursor: not-allowed; color: var(--amber); }
 
   /* ── CRISIS CARD ── */
-  .crisis-card {
-    display: none; border: 1px solid rgba(200, 134, 10, 0.25);
-    border-top: 2px solid var(--amber); padding: 48px 40px 40px;
-    margin-bottom: 40px; text-align: center; animation: fadeUp 0.6s ease forwards;
-  }
-
+  .crisis-card { display: none; border: 1px solid rgba(200, 134, 10, 0.25); border-top: 2px solid var(--amber); padding: 48px 40px 40px; margin-bottom: 40px; text-align: center; animation: fadeUp 0.6s ease forwards; }
   .crisis-card.visible { display: block; }
   .crisis-icon { font-size: 28px; margin-bottom: 20px; opacity: 0.8; }
   .crisis-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--parchment); margin-bottom: 16px; }
@@ -320,36 +125,17 @@
   .crisis-resource-link:hover { color: var(--amber-bright); }
   .crisis-divider { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.2); margin-bottom: 28px; }
   .crisis-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-
-  .crisis-continue-btn {
-    background: transparent; border: 1px solid rgba(200, 134, 10, 0.35);
-    color: rgba(232, 223, 200, 0.5); font-family: 'Space Mono', monospace;
-    font-size: 9px; letter-spacing: 0.2em; padding: 12px 28px;
-    cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 2px;
-  }
+  .crisis-continue-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.35); color: rgba(232, 223, 200, 0.5); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; padding: 12px 28px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 2px; }
   .crisis-continue-btn:hover { border-color: var(--amber); color: var(--amber); }
-
-  .crisis-stop-btn {
-    background: transparent; border: none; color: rgba(232, 223, 200, 0.25);
-    font-family: 'Crimson Text', serif; font-size: 15px; font-style: italic;
-    cursor: pointer; transition: color 0.2s; padding: 4px;
-  }
+  .crisis-stop-btn { background: transparent; border: none; color: rgba(232, 223, 200, 0.25); font-family: 'Crimson Text', serif; font-size: 15px; font-style: italic; cursor: pointer; transition: color 0.2s; padding: 4px; }
   .crisis-stop-btn:hover { color: rgba(232, 223, 200, 0.5); }
 
   /* ── LOADING ── */
   .loading-state { display: none; text-align: center; padding: 60px 0; }
   .loading-state.visible { display: block; }
-
-  .film-reel {
-    display: inline-block; width: 48px; height: 48px;
-    border: 2px solid rgba(200, 134, 10, 0.2); border-top-color: var(--amber);
-    border-radius: 50%; animation: reel 1s linear infinite; margin-bottom: 20px;
-  }
-
+  .film-reel { display: inline-block; width: 48px; height: 48px; border: 2px solid rgba(200, 134, 10, 0.2); border-top-color: var(--amber); border-radius: 50%; animation: reel 1s linear infinite; margin-bottom: 20px; }
   @keyframes reel { to { transform: rotate(360deg); } }
-
   .loading-text { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: var(--amber); text-transform: uppercase; animation: pulse 1.5s ease-in-out infinite; }
-
   @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
   /* ── ERROR ── */
@@ -359,40 +145,22 @@
   .error-msg { font-size: 15px; color: rgba(208, 144, 144, 0.7); line-height: 1.5; }
 
   /* ── SCENE CARD ── */
-  .scene-card {
-    display: none; border: 1px solid rgba(200, 134, 10, 0.2);
-    border-top: 2px solid var(--amber); margin-bottom: 60px;
-    position: relative; animation: fadeUp 0.6s ease forwards; overflow: hidden;
-  }
-
+  .scene-card { display: none; border: 1px solid rgba(200, 134, 10, 0.2); border-top: 2px solid var(--amber); margin-bottom: 60px; position: relative; animation: fadeUp 0.6s ease forwards; overflow: hidden; }
   .scene-card.visible { display: block; }
-
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   .scene-image { width: 100%; height: 220px; object-fit: cover; display: block; filter: sepia(40%) brightness(0.6); }
-
-  .scene-image-overlay {
-    position: absolute; top: 0; left: 0; right: 0; height: 220px;
-    background: linear-gradient(to bottom, rgba(10, 8, 5, 0.2) 0%, rgba(10, 8, 5, 0.7) 100%);
-    pointer-events: none;
-  }
-
+  .scene-image-overlay { position: absolute; top: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, rgba(10, 8, 5, 0.2) 0%, rgba(10, 8, 5, 0.7) 100%); pointer-events: none; }
   .scene-image-wrapper { position: relative; display: none; }
   .scene-image-wrapper.has-image { display: block; }
 
   .scene-content { padding: 32px 40px 36px; position: relative; }
-  .scene-content::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(200, 134, 10, 0.03) 0%, transparent 60%);
-    pointer-events: none;
-  }
+  .scene-content::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200, 134, 10, 0.03) 0%, transparent 60%); pointer-events: none; }
 
   .scene-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
   .scene-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.35em; color: var(--amber); text-transform: uppercase; }
   .scene-date { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(232, 223, 200, 0.3); letter-spacing: 0.1em; }
-
   .chapter-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.1; color: var(--parchment); margin-bottom: 28px; letter-spacing: -0.01em; }
-
   .story-beat { font-family: 'Crimson Text', serif; font-size: 19px; font-style: italic; line-height: 1.7; color: rgba(232, 223, 200, 0.75); margin-bottom: 24px; padding-left: 20px; border-left: 2px solid rgba(200, 134, 10, 0.3); }
 
   .original-input-block { margin-bottom: 28px; }
@@ -413,9 +181,8 @@
   .note-block { margin-bottom: 24px; }
   .note-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.6); text-transform: uppercase; margin-bottom: 4px; }
   .note-sublabel { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.3); margin-bottom: 12px; transition: color 0.2s; }
-
   .directors-note-list { list-style: none; padding: 0; margin: 0; }
-  .directors-note-list li { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.55; color: rgba(232, 223, 200, 0.6); padding: 10px 0 10px 20px; border-left: 1px solid rgba(200, 134, 10, 0.15); margin-bottom: 8px; transition: border-color 0.3s; }
+  .directors-note-list li { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.55; color: rgba(232, 223, 200, 0.6); padding: 10px 0 10px 20px; border-left: 1px solid rgba(200, 134, 10, 0.15); margin-bottom: 8px; }
   .directors-note-list li:last-child { margin-bottom: 0; }
 
   .opportunity-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(200, 134, 10, 0.15); }
@@ -423,119 +190,22 @@
   .opportunity-text { font-family: 'Crimson Text', serif; font-size: 17px; letter-spacing: 0.02em; color: var(--amber-bright); line-height: 1.7; text-transform: none; }
 
   /* ── LENS FILTERS ── */
-  .lens-block {
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(200, 134, 10, 0.12);
-  }
-
-  .lens-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .lens-sublabel {
-    font-family: 'Crimson Text', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.28);
-    margin-bottom: 18px;
-  }
-
-  .lens-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  .lens-btn {
-    background: transparent;
-    border: 1px solid rgba(200, 134, 10, 0.15);
-    padding: 12px 10px 10px;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color 0.2s, background 0.2s;
-    border-radius: 2px;
-  }
-
-  .lens-btn:hover:not(:disabled) {
-    border-color: rgba(200, 134, 10, 0.4);
-    background: rgba(200, 134, 10, 0.04);
-  }
-
-  .lens-btn.active {
-    border-color: var(--amber);
-    background: rgba(200, 134, 10, 0.07);
-  }
-
+  .lens-block { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(200, 134, 10, 0.12); }
+  .lens-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 4px; }
+  .lens-sublabel { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.28); margin-bottom: 18px; }
+  .lens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .lens-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.15); padding: 12px 10px 10px; cursor: pointer; text-align: left; transition: border-color 0.2s, background 0.2s; border-radius: 2px; }
+  .lens-btn:hover:not(:disabled) { border-color: rgba(200, 134, 10, 0.4); background: rgba(200, 134, 10, 0.04); }
+  .lens-btn.active { border-color: var(--amber); background: rgba(200, 134, 10, 0.07); }
   .lens-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .lens-btn-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--parchment);
-    line-height: 1.2;
-    margin-bottom: 4px;
-    display: block;
-  }
-
+  .lens-btn-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--parchment); line-height: 1.2; margin-bottom: 4px; display: block; }
   .lens-btn.active .lens-btn-name { color: var(--amber); }
-
-  .lens-btn-desc {
-    font-family: 'Crimson Text', serif;
-    font-size: 12px;
-    font-style: italic;
-    color: rgba(232, 223, 200, 0.3);
-    line-height: 1.3;
-    display: block;
-  }
-
-  .lens-loading {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 0 4px;
-  }
-
+  .lens-btn-desc { font-family: 'Crimson Text', serif; font-size: 12px; font-style: italic; color: rgba(232, 223, 200, 0.3); line-height: 1.3; display: block; }
+  .lens-loading { display: none; align-items: center; gap: 10px; padding: 16px 0 4px; }
   .lens-loading.visible { display: flex; }
-
-  .lens-spinner {
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid rgba(200, 134, 10, 0.2);
-    border-top-color: var(--amber);
-    border-radius: 50%;
-    animation: reel 0.8s linear infinite;
-    flex-shrink: 0;
-  }
-
-  .lens-loading-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    color: rgba(200, 134, 10, 0.5);
-    text-transform: uppercase;
-  }
-
-  .lens-reset-btn {
-    display: none;
-    background: transparent;
-    border: none;
-    color: rgba(200, 134, 10, 0.35);
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 8px 0 0;
-    transition: color 0.2s;
-  }
-
+  .lens-spinner { width: 16px; height: 16px; border: 1.5px solid rgba(200, 134, 10, 0.2); border-top-color: var(--amber); border-radius: 50%; animation: reel 0.8s linear infinite; flex-shrink: 0; }
+  .lens-loading-text { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.25em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; }
+  .lens-reset-btn { display: none; background: transparent; border: none; color: rgba(200, 134, 10, 0.35); font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; padding: 8px 0 0; transition: color 0.2s; }
   .lens-reset-btn.visible { display: inline-block; }
   .lens-reset-btn:hover { color: rgba(200, 134, 10, 0.7); }
 
@@ -571,23 +241,15 @@
   /* ── FOOTER ── */
   footer { text-align: center; padding: 20px 0 40px; border-top: 1px solid rgba(200, 134, 10, 0.1); }
   footer p { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(232, 223, 200, 0.15); text-transform: uppercase; }
+  .footer-privacy { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(232, 223, 200, 0.2); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(232, 223, 200, 0.1); padding-bottom: 1px; transition: color 0.2s; display: inline-block; margin-top: 8px; }
+  .footer-privacy:hover { color: rgba(200, 134, 10, 0.5); }
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--ink); }
   ::-webkit-scrollbar-thumb { background: rgba(200, 134, 10, 0.3); border-radius: 2px; }
 
-  @media (max-width: 560px) {
-    .lens-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 480px) {
-    .auth-input-row { flex-direction: column; }
-    .auth-btn { width: 100%; }
-    .auth-bar { top: 12px; }
-    .auth-user-email { max-width: 120px; font-size: 8px; }
-    .scene-content { padding: 24px 20px 20px; }
-    .lens-grid { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 560px) { .lens-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .auth-input-row { flex-direction: column; } .auth-btn { width: 100%; } .auth-bar { top: 12px; } .auth-user-email { max-width: 120px; font-size: 8px; } .scene-content { padding: 24px 20px 20px; } }
 </style>
 </head>
 <body>
@@ -653,36 +315,12 @@
     <div class="crisis-title">Before we continue</div>
     <p class="crisis-text">It sounds like you might be carrying something heavy right now.<br>You don't have to navigate this alone.</p>
     <div class="crisis-resources">
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🇦🇺 Australia</div>
-        <div class="crisis-resource-name">Lifeline</div>
-        <div class="crisis-resource-number">13 11 14</div>
-      </div>
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🇦🇺 Australia</div>
-        <div class="crisis-resource-name">Beyond Blue</div>
-        <div class="crisis-resource-number">1300 22 4636</div>
-      </div>
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🇳🇿 New Zealand</div>
-        <div class="crisis-resource-name">Lifeline NZ</div>
-        <div class="crisis-resource-number">0800 543 354</div>
-      </div>
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🇬🇧 United Kingdom</div>
-        <div class="crisis-resource-name">Samaritans</div>
-        <div class="crisis-resource-number">116 123</div>
-      </div>
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🇺🇸 United States</div>
-        <div class="crisis-resource-name">Crisis Lifeline</div>
-        <div class="crisis-resource-number">988</div>
-      </div>
-      <div class="crisis-resource">
-        <div class="crisis-resource-country">🌍 Everywhere else</div>
-        <div class="crisis-resource-name">Find a helpline</div>
-        <a href="https://findahelpline.com" target="_blank" class="crisis-resource-link">findahelpline.com</a>
-      </div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🇦🇺 Australia</div><div class="crisis-resource-name">Lifeline</div><div class="crisis-resource-number">13 11 14</div></div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🇦🇺 Australia</div><div class="crisis-resource-name">Beyond Blue</div><div class="crisis-resource-number">1300 22 4636</div></div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🇳🇿 New Zealand</div><div class="crisis-resource-name">Lifeline NZ</div><div class="crisis-resource-number">0800 543 354</div></div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🇬🇧 United Kingdom</div><div class="crisis-resource-name">Samaritans</div><div class="crisis-resource-number">116 123</div></div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🇺🇸 United States</div><div class="crisis-resource-name">Crisis Lifeline</div><div class="crisis-resource-number">988</div></div>
+      <div class="crisis-resource"><div class="crisis-resource-country">🌍 Everywhere else</div><div class="crisis-resource-name">Find a helpline</div><a href="https://findahelpline.com" target="_blank" class="crisis-resource-link">findahelpline.com</a></div>
     </div>
     <div class="crisis-divider">When you're ready, you can continue — or step away. Both are okay.</div>
     <div class="crisis-actions">
@@ -730,7 +368,7 @@
           <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
         </button>
       </div>
-      <div class="note-block" id="directors-note-block">
+      <div class="note-block">
         <div class="note-label">Director's Note</div>
         <div class="note-sublabel" id="note-sublabel">Three things worth hearing.</div>
         <ul class="directors-note-list" id="r-director"></ul>
@@ -800,6 +438,7 @@
 
   <footer>
     <p>The Turning Point &nbsp;·&nbsp; Your story, reframed &nbsp;·&nbsp; © 2026</p>
+    <a href="/privacy.html" class="footer-privacy">Privacy</a>
   </footer>
 
 </div>
@@ -834,6 +473,15 @@ const CRISIS_KEYWORDS = [
 
 const MIN_CHARS = 50;
 
+const LENS_NAMES = {
+  'close-up': 'The Close-Up',
+  'wide-shot': 'The Wide Shot',
+  'hard-cut': 'The Hard Cut',
+  'voice-over': 'The Voice Over',
+  'raw-cut': 'The Raw Cut',
+  'golden-hour': 'The Golden Hour'
+};
+
 // ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
@@ -849,22 +497,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (accessToken && refreshToken) {
     try {
       const res = await fetch('/.netlify/functions/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'refresh', refresh_token: refreshToken })
       });
       const data = await res.json();
       if (data.access_token) {
         saveSession({ access_token: data.access_token, refresh_token: data.refresh_token, user: data.user });
         window.history.replaceState({}, '', window.location.pathname);
-        await onSignedIn();
-        return;
+        await onSignedIn(); return;
       }
     } catch {}
     saveSession({ access_token: accessToken, refresh_token: refreshToken, user: {} });
     window.history.replaceState({}, '', window.location.pathname);
-    await onSignedIn();
-    return;
+    await onSignedIn(); return;
   }
 
   const stored = localStorage.getItem('tp_session');
@@ -872,32 +517,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const parsed = JSON.parse(stored);
       const res = await fetch('/.netlify/functions/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'refresh', refresh_token: parsed.refresh_token })
       });
       const data = await res.json();
       if (data.access_token) {
         saveSession({ access_token: data.access_token, refresh_token: data.refresh_token, user: data.user });
-        await onSignedIn();
-        return;
+        await onSignedIn(); return;
       }
     } catch {}
     localStorage.removeItem('tp_session');
   }
 
-  if (localStorage.getItem('tp_guest') === '1') {
-    enableGuestMode();
-  }
+  if (localStorage.getItem('tp_guest') === '1') { enableGuestMode(); }
 });
 
 // ─────────────────────────────────────────────
 // SESSION
 // ─────────────────────────────────────────────
-function saveSession(s) {
-  session = s;
-  localStorage.setItem('tp_session', JSON.stringify(s));
-}
+function saveSession(s) { session = s; localStorage.setItem('tp_session', JSON.stringify(s)); }
 
 async function onSignedIn() {
   const email = session?.user?.email || '';
@@ -905,11 +543,9 @@ async function onSignedIn() {
   document.getElementById('auth-user-email').textContent = email;
   document.getElementById('auth-section').classList.add('hidden');
   document.getElementById('guest-notice').classList.remove('visible');
-  guestMode = false;
-  localStorage.removeItem('tp_guest');
+  guestMode = false; localStorage.removeItem('tp_guest');
   await loadEntriesFromDB();
-  renderReel();
-  updateSceneLabel();
+  renderReel(); updateSceneLabel();
 }
 
 function signOut() {
@@ -928,8 +564,7 @@ function signOut() {
 // GUEST MODE
 // ─────────────────────────────────────────────
 function enableGuestMode() {
-  guestMode = true;
-  localStorage.setItem('tp_guest', '1');
+  guestMode = true; localStorage.setItem('tp_guest', '1');
   document.getElementById('auth-section').classList.add('hidden');
   document.getElementById('guest-notice').classList.add('visible');
   entries = JSON.parse(localStorage.getItem('tp_entries') || '[]');
@@ -1004,22 +639,17 @@ function showAuthStatus(type, msg) {
 async function loadEntriesFromDB() {
   if (!session?.access_token) return;
   try {
-    const res = await fetch('/.netlify/functions/entries', {
-      headers: { 'Authorization': 'Bearer ' + session.access_token }
-    });
+    const res = await fetch('/.netlify/functions/entries', { headers: { 'Authorization': 'Bearer ' + session.access_token } });
     if (res.status === 401) { signOut(); return; }
     if (!res.ok) return;
     const data = await res.json();
     entries = data.map(e => ({
       id: e.id, dbId: e.id, sceneNum: e.scene_num,
       date: e.date || new Date(e.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }),
-      inputText: e.input_text,
-      chapter_title: e.chapter_title, story_beat: e.story_beat,
+      inputText: e.input_text, chapter_title: e.chapter_title, story_beat: e.story_beat,
       directors_note: (() => { try { const p = JSON.parse(e.directors_note); return Array.isArray(p) ? p : e.directors_note; } catch { return e.directors_note; } })(),
-      opportunity: e.opportunity,
-      mood_keywords: e.mood_keywords || null,
-      imageUrl: e.image_url || null,
-      reflection: e.reflection
+      opportunity: e.opportunity, mood_keywords: e.mood_keywords || null,
+      imageUrl: e.image_url || null, reflection: e.reflection
     }));
   } catch {}
 }
@@ -1055,11 +685,8 @@ async function updateReflectionInDB(dbId, reflection) {
 function updateCharCount() {
   const val = document.getElementById('journal-input').value.length;
   const el = document.getElementById('char-count');
-  if (val > 0 && val < MIN_CHARS) {
-    el.textContent = val + ' / 2000 — keep writing...'; el.classList.add('too-short');
-  } else {
-    el.textContent = val + ' / 2000'; el.classList.remove('too-short');
-  }
+  if (val > 0 && val < MIN_CHARS) { el.textContent = val + ' / 2000 — keep writing...'; el.classList.add('too-short'); }
+  else { el.textContent = val + ' / 2000'; el.classList.remove('too-short'); }
 }
 
 function updateSceneLabel() {
@@ -1069,9 +696,7 @@ function updateSceneLabel() {
 // ─────────────────────────────────────────────
 // CRISIS
 // ─────────────────────────────────────────────
-function checkForCrisis(text) {
-  return CRISIS_KEYWORDS.some(k => text.toLowerCase().includes(k));
-}
+function checkForCrisis(text) { return CRISIS_KEYWORDS.some(k => text.toLowerCase().includes(k)); }
 
 function showCrisisCard() {
   return new Promise((resolve) => {
@@ -1090,14 +715,10 @@ async function rollCamera() {
   const text = document.getElementById('journal-input').value.trim();
   if (!text || text.length < MIN_CHARS) {
     const el = document.getElementById('char-count');
-    el.textContent = text.length + ' / 2000 — keep writing...'; el.classList.add('too-short');
-    return;
+    el.textContent = text.length + ' / 2000 — keep writing...'; el.classList.add('too-short'); return;
   }
 
-  if (checkForCrisis(text)) {
-    const proceed = await showCrisisCard();
-    if (!proceed) return;
-  }
+  if (checkForCrisis(text)) { const proceed = await showCrisisCard(); if (!proceed) return; }
 
   document.getElementById('scene-card').classList.remove('visible');
   document.getElementById('error-card').classList.remove('visible');
@@ -1109,25 +730,15 @@ async function rollCamera() {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text })
     });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Something went wrong — please try again.');
-    }
-
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Something went wrong — please try again.'); }
     const result = await res.json();
 
     const entry = {
-      id: Date.now(),
-      sceneNum: entries.length + 1,
+      id: Date.now(), sceneNum: entries.length + 1,
       date: new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }),
-      inputText: text,
-      chapter_title: result.chapter_title,
-      story_beat: result.story_beat,
-      directors_note: result.directors_note,
-      opportunity: result.opportunity,
-      mood_keywords: result.mood_keywords || null,
-      imageUrl: result.imageUrl || null,
+      inputText: text, chapter_title: result.chapter_title, story_beat: result.story_beat,
+      directors_note: result.directors_note, opportunity: result.opportunity,
+      mood_keywords: result.mood_keywords || null, imageUrl: result.imageUrl || null,
       audioBase64: result.audioBase64 || null
     };
 
@@ -1140,8 +751,7 @@ async function rollCamera() {
       localStorage.setItem('tp_entries', JSON.stringify(entries));
     }
 
-    showScene(entry);
-    renderReel();
+    showScene(entry); renderReel();
     document.getElementById('journal-input').value = '';
     updateCharCount(); updateSceneLabel();
 
@@ -1157,37 +767,17 @@ async function rollCamera() {
 // ─────────────────────────────────────────────
 // LENS FILTERS
 // ─────────────────────────────────────────────
-const LENS_NAMES = {
-  'close-up': 'The Close-Up',
-  'wide-shot': 'The Wide Shot',
-  'hard-cut': 'The Hard Cut',
-  'voice-over': 'The Voice Over',
-  'raw-cut': 'The Raw Cut',
-  'golden-hour': 'The Golden Hour'
-};
-
 async function applyLens(lens, btnEl) {
   if (!currentEntry) return;
+  if (activeLens === lens) { resetLens(); return; }
 
-  // Clicking the active lens resets to default
-  if (activeLens === lens) {
-    resetLens();
-    return;
-  }
-
-  // Store originals on first lens application
   if (!originalDirectorsNote) {
-    originalDirectorsNote = Array.isArray(currentEntry.directors_note)
-      ? [...currentEntry.directors_note]
-      : currentEntry.directors_note;
+    originalDirectorsNote = Array.isArray(currentEntry.directors_note) ? [...currentEntry.directors_note] : currentEntry.directors_note;
     originalOpportunity = currentEntry.opportunity;
   }
 
-  // Mark active, show loading, disable buttons
   document.querySelectorAll('.lens-btn').forEach(b => b.classList.remove('active'));
-  btnEl.classList.add('active');
-  activeLens = lens;
-
+  btnEl.classList.add('active'); activeLens = lens;
   document.getElementById('lens-loading').classList.add('visible');
   document.getElementById('lens-loading-text').textContent = 'Changing the lens...';
   document.getElementById('lens-reset-btn').classList.remove('visible');
@@ -1195,47 +785,23 @@ async function applyLens(lens, btnEl) {
 
   try {
     const res = await fetch('/.netlify/functions/reframe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: currentEntry.inputText, lens })
     });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Lens failed to render — try again.');
-    }
-
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Lens failed — try again.'); }
     const result = await res.json();
 
-    // Update Director's Note
-    const notes = Array.isArray(result.directors_note)
-      ? result.directors_note
-      : (result.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
+    const notes = Array.isArray(result.directors_note) ? result.directors_note : (result.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
     document.getElementById('r-director').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
-
-    // Update Hidden Opportunity
     document.getElementById('r-opportunity').textContent = result.opportunity || '';
-
-    // Update sublabel to show active lens
-    const desc = btnEl.querySelector('.lens-btn-desc').textContent;
-    document.getElementById('note-sublabel').textContent = LENS_NAMES[lens] + ' — ' + desc;
-
+    document.getElementById('note-sublabel').textContent = LENS_NAMES[lens] + ' — ' + btnEl.querySelector('.lens-btn-desc').textContent;
     document.getElementById('lens-reset-btn').classList.add('visible');
 
   } catch (err) {
-    // Deactivate on error, restore originals, show brief message
-    btnEl.classList.remove('active');
-    activeLens = null;
-    if (originalDirectorsNote !== null) {
-      renderNoteFromOriginals();
-      document.getElementById('note-sublabel').textContent = 'Three things worth hearing.';
-      originalDirectorsNote = null;
-      originalOpportunity = null;
-    }
+    btnEl.classList.remove('active'); activeLens = null;
+    if (originalDirectorsNote !== null) { renderNoteFromOriginals(); document.getElementById('note-sublabel').textContent = 'Three things worth hearing.'; originalDirectorsNote = null; originalOpportunity = null; }
     document.getElementById('lens-loading-text').textContent = err.message || 'Lens failed — try again.';
-    setTimeout(() => {
-      document.getElementById('lens-loading-text').textContent = 'Changing the lens...';
-    }, 2500);
+    setTimeout(() => { document.getElementById('lens-loading-text').textContent = 'Changing the lens...'; }, 2500);
   } finally {
     document.getElementById('lens-loading').classList.remove('visible');
     document.querySelectorAll('.lens-btn').forEach(b => b.disabled = false);
@@ -1243,9 +809,7 @@ async function applyLens(lens, btnEl) {
 }
 
 function renderNoteFromOriginals() {
-  const notes = Array.isArray(originalDirectorsNote)
-    ? originalDirectorsNote
-    : (originalDirectorsNote || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
+  const notes = Array.isArray(originalDirectorsNote) ? originalDirectorsNote : (originalDirectorsNote || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
   document.getElementById('r-director').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
   document.getElementById('r-opportunity').textContent = originalOpportunity || '';
 }
@@ -1254,17 +818,13 @@ function resetLens() {
   if (originalDirectorsNote === null) return;
   renderNoteFromOriginals();
   document.getElementById('note-sublabel').textContent = 'Three things worth hearing.';
-  originalDirectorsNote = null;
-  originalOpportunity = null;
-  activeLens = null;
+  originalDirectorsNote = null; originalOpportunity = null; activeLens = null;
   document.querySelectorAll('.lens-btn').forEach(b => { b.classList.remove('active'); b.disabled = false; });
   document.getElementById('lens-reset-btn').classList.remove('visible');
 }
 
 function resetLensState() {
-  originalDirectorsNote = null;
-  originalOpportunity = null;
-  activeLens = null;
+  originalDirectorsNote = null; originalOpportunity = null; activeLens = null;
   document.querySelectorAll('.lens-btn').forEach(b => { b.classList.remove('active'); b.disabled = false; });
   document.getElementById('lens-reset-btn').classList.remove('visible');
   document.getElementById('lens-loading').classList.remove('visible');
@@ -1280,24 +840,19 @@ function toggleVoice() {
     speechSynth.cancel(); setVoiceState(false); return;
   }
   if (!currentEntry) return;
-
   if (currentEntry.audioBase64) {
     currentAudio = new Audio('data:audio/mpeg;base64,' + currentEntry.audioBase64);
     currentAudio.onplay = () => setVoiceState(true);
     currentAudio.onended = () => { setVoiceState(false); currentAudio = null; };
     currentAudio.onerror = () => { setVoiceState(false); currentAudio = null; fallbackToSpeechSynth(); };
     currentAudio.play();
-  } else {
-    fallbackToSpeechSynth();
-  }
+  } else { fallbackToSpeechSynth(); }
 }
 
 function fallbackToSpeechSynth() {
   if (!currentEntry) return;
   speechSynth.cancel();
-  const dirNote = Array.isArray(currentEntry.directors_note)
-    ? currentEntry.directors_note.join(' ')
-    : currentEntry.directors_note;
+  const dirNote = Array.isArray(currentEntry.directors_note) ? currentEntry.directors_note.join(' ') : currentEntry.directors_note;
   const script = [currentEntry.chapter_title + '.', currentEntry.story_beat, "Director's note. " + dirNote, "The hidden opportunity. " + currentEntry.opportunity].join(' ');
   const utterance = new SpeechSynthesisUtterance(script);
   utterance.rate = 0.88; utterance.pitch = 0.95;
@@ -1336,11 +891,8 @@ async function saveReflection() {
   if (!text || !currentEntry) return;
   const idx = entries.findIndex(e => e.id === currentEntry.id);
   if (idx !== -1) entries[idx].reflection = text;
-  if (session?.access_token && currentEntry.dbId) {
-    await updateReflectionInDB(currentEntry.dbId, text);
-  } else {
-    localStorage.setItem('tp_entries', JSON.stringify(entries));
-  }
+  if (session?.access_token && currentEntry.dbId) { await updateReflectionInDB(currentEntry.dbId, text); }
+  else { localStorage.setItem('tp_entries', JSON.stringify(entries)); }
   document.getElementById('reflection-saved').classList.add('visible');
 }
 
@@ -1348,12 +900,8 @@ async function saveReflection() {
 // SHOW SCENE
 // ─────────────────────────────────────────────
 function showScene(entry) {
-  currentEntry = entry;
-  currentEntryId = entry.id;
-
-  // Always reset lens state when switching scenes
+  currentEntry = entry; currentEntryId = entry.id;
   resetLensState();
-
   if (isSpeaking) { if (currentAudio) { currentAudio.pause(); currentAudio = null; } speechSynth.cancel(); setVoiceState(false); }
 
   document.getElementById('r-scene-num').textContent = 'Scene ' + String(entry.sceneNum).padStart(3, '0');
@@ -1364,23 +912,16 @@ function showScene(entry) {
   document.getElementById('original-input-content').classList.remove('visible');
   document.getElementById('original-input-toggle').innerHTML = '<span>▸ &nbsp; See what you wrote</span>';
 
-  const notes = Array.isArray(entry.directors_note)
-    ? entry.directors_note
-    : (entry.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
+  const notes = Array.isArray(entry.directors_note) ? entry.directors_note : (entry.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
   document.getElementById('r-director').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
-
   document.getElementById('r-opportunity').textContent = entry.opportunity || '';
   document.getElementById('reflection-input').value = entry.reflection || '';
   document.getElementById('reflection-saved').classList.remove('visible');
 
   const imageWrapper = document.getElementById('scene-image-wrapper');
   const imageEl = document.getElementById('scene-image');
-  if (entry.imageUrl) {
-    imageEl.src = entry.imageUrl;
-    imageWrapper.classList.add('has-image');
-  } else {
-    imageWrapper.classList.remove('has-image');
-  }
+  if (entry.imageUrl) { imageEl.src = entry.imageUrl; imageWrapper.classList.add('has-image'); }
+  else { imageWrapper.classList.remove('has-image'); }
 
   document.getElementById('scene-card').classList.add('visible');
   setTimeout(() => { document.getElementById('scene-card').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
