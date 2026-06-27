@@ -93,6 +93,100 @@
   .guest-signin-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.3); color: rgba(200, 134, 10, 0.6); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; padding: 7px 14px; cursor: pointer; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; white-space: nowrap; }
   .guest-signin-btn:hover { border-color: var(--amber); color: var(--amber); }
 
+  /* ── ONBOARDING HINT ── */
+  .onboarding-hint {
+    display: none;
+    border: 1px solid rgba(200, 134, 10, 0.15);
+    border-left: 2px solid rgba(200, 134, 10, 0.4);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    background: rgba(200, 134, 10, 0.03);
+    border-radius: 0 2px 2px 0;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .onboarding-hint.visible { display: block; }
+
+  .onboarding-hint-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    color: rgba(200, 134, 10, 0.45);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .onboarding-hint-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(232, 223, 200, 0.5);
+  }
+
+  .onboarding-hint-text strong {
+    font-style: normal;
+    color: rgba(232, 223, 200, 0.75);
+    font-weight: 600;
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 134, 10, 0.3);
+    color: rgba(200, 134, 10, 0.4);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .tooltip-icon:hover { border-color: var(--amber); color: var(--amber); }
+
+  .tooltip-bubble {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    background: rgba(15, 12, 8, 0.97);
+    border: 1px solid rgba(200, 134, 10, 0.2);
+    border-radius: 2px;
+    padding: 12px 14px;
+    width: 240px;
+    z-index: 100;
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.55;
+    color: rgba(232, 223, 200, 0.6);
+    pointer-events: none;
+  }
+
+  .tooltip-bubble.visible { display: block; }
+
+  .tooltip-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    border: 5px solid transparent;
+    border-top-color: rgba(200, 134, 10, 0.2);
+  }
+
   /* ── JOURNAL INPUT ── */
   .journal-section { margin-bottom: 60px; }
   .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; }
@@ -191,7 +285,8 @@
 
   /* ── LENS FILTERS ── */
   .lens-block { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(200, 134, 10, 0.12); }
-  .lens-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 4px; }
+  .lens-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .lens-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; }
   .lens-sublabel { font-family: 'Crimson Text', serif; font-size: 13px; font-style: italic; color: rgba(232, 223, 200, 0.28); margin-bottom: 18px; }
   .lens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .lens-btn { background: transparent; border: 1px solid rgba(200, 134, 10, 0.15); padding: 12px 10px 10px; cursor: pointer; text-align: left; transition: border-color 0.2s, background 0.2s; border-radius: 2px; }
@@ -211,7 +306,8 @@
 
   /* ── REFLECTION ── */
   .reflection-block { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(200, 134, 10, 0.12); }
-  .reflection-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; margin-bottom: 6px; }
+  .reflection-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .reflection-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.35em; color: rgba(200, 134, 10, 0.5); text-transform: uppercase; }
   .reflection-sublabel { font-family: 'Crimson Text', serif; font-size: 14px; font-style: italic; color: rgba(232, 223, 200, 0.3); margin-bottom: 12px; }
   .reflection-textarea { width: 100%; background: rgba(255,255,255,0.015); border: 1px solid rgba(200, 134, 10, 0.12); color: rgba(232, 223, 200, 0.7); font-family: 'Crimson Text', serif; font-size: 17px; font-style: italic; line-height: 1.65; padding: 16px 20px; border-radius: 2px; resize: none; outline: none; min-height: 100px; transition: border-color 0.2s, background 0.2s; }
   .reflection-textarea:focus { border-color: rgba(200, 134, 10, 0.3); background: rgba(255,255,255,0.025); }
@@ -249,7 +345,15 @@
   ::-webkit-scrollbar-thumb { background: rgba(200, 134, 10, 0.3); border-radius: 2px; }
 
   @media (max-width: 560px) { .lens-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .auth-input-row { flex-direction: column; } .auth-btn { width: 100%; } .auth-bar { top: 12px; } .auth-user-email { max-width: 120px; font-size: 8px; } .scene-content { padding: 24px 20px 20px; } }
+  @media (max-width: 480px) {
+    .auth-input-row { flex-direction: column; }
+    .auth-btn { width: 100%; }
+    .auth-bar { top: 12px; }
+    .auth-user-email { max-width: 120px; font-size: 8px; }
+    .scene-content { padding: 24px 20px 20px; }
+    .lens-grid { grid-template-columns: 1fr 1fr; }
+    .tooltip-bubble { width: 200px; }
+  }
 </style>
 </head>
 <body>
@@ -265,7 +369,7 @@
     </div>
     <div class="brand-label">A cinematic journal</div>
     <h1 class="main-title">The Turning<br><em>Point</em></h1>
-    <p class="tagline">Your life is not a series of accidents. Write today's scene — your director will find the story inside.</p>
+    <p class="tagline">Your life is not a series of accidents. Write today's scene. Your director will find the story inside.</p>
   </header>
 
   <!-- AUTH SECTION -->
@@ -273,7 +377,7 @@
     <div class="auth-label">Your story, saved</div>
     <div class="auth-step active" id="auth-step-email">
       <div class="auth-title">Sign in to save your scenes</div>
-      <p class="auth-desc">Enter your email — we'll send a magic link. No password needed. Your scenes sync across every device.</p>
+      <p class="auth-desc">Enter your email. We'll send a magic link. No password needed. Your scenes sync across every device.</p>
       <div class="auth-input-row">
         <input type="email" class="auth-input" id="auth-email-input" placeholder="your@email.com" autocomplete="email" autocapitalize="none" onkeydown="if(event.key==='Enter') sendMagicLink()">
         <button class="auth-btn" id="auth-send-btn" onclick="sendMagicLink()">Send link</button>
@@ -284,7 +388,7 @@
     </div>
     <div class="auth-step" id="auth-step-sent">
       <div class="auth-sent-title">Check your inbox</div>
-      <p class="auth-sent-desc">A magic link is on its way to <strong id="auth-sent-email"></strong>. Click it to sign in — the link expires in 1 hour.</p>
+      <p class="auth-sent-desc">A magic link is on its way to <strong id="auth-sent-email"></strong>. Click it to sign in. The link expires in 1 hour.</p>
       <a class="auth-resend-link" onclick="resendMagicLink()">Resend link</a>
       <div class="auth-status" id="auth-resend-status"></div>
     </div>
@@ -292,8 +396,14 @@
 
   <!-- GUEST NOTICE -->
   <div class="guest-notice" id="guest-notice">
-    <span class="guest-notice-text">Guest mode — scenes saved locally only</span>
+    <span class="guest-notice-text">Guest mode: scenes saved locally only</span>
     <button class="guest-signin-btn" onclick="showAuthSection()">Sign in to save your reel →</button>
+  </div>
+
+  <!-- ONBOARDING HINT: visible until 3 entries -->
+  <div class="onboarding-hint" id="onboarding-hint">
+    <div class="onboarding-hint-label">How this works</div>
+    <p class="onboarding-hint-text">Write about anything from your day. <strong>Ordinary moments work just as well as dramatic ones.</strong> A conversation, a decision, something small that stayed with you. The AI reframes what you write as a cinematic scene, with a chapter title, a story beat, and a director's perspective. The smaller and more real, the better.</p>
   </div>
 
   <!-- JOURNAL INPUT -->
@@ -322,7 +432,7 @@
       <div class="crisis-resource"><div class="crisis-resource-country">🇺🇸 United States</div><div class="crisis-resource-name">Crisis Lifeline</div><div class="crisis-resource-number">988</div></div>
       <div class="crisis-resource"><div class="crisis-resource-country">🌍 Everywhere else</div><div class="crisis-resource-name">Find a helpline</div><a href="https://findahelpline.com" target="_blank" class="crisis-resource-link">findahelpline.com</a></div>
     </div>
-    <div class="crisis-divider">When you're ready, you can continue — or step away. Both are okay.</div>
+    <div class="crisis-divider">When you're ready, you can continue. Or step away. Both are okay.</div>
     <div class="crisis-actions">
       <button class="crisis-continue-btn" id="crisis-continue">I'd like to continue journaling</button>
       <button class="crisis-stop-btn" id="crisis-stop">I'll step away and reach out for support</button>
@@ -368,7 +478,7 @@
           <span id="voice-btn-label">▶ &nbsp; Hear Your Scene</span>
         </button>
       </div>
-      <div class="note-block">
+      <div class="note-block" id="directors-note-block">
         <div class="note-label">Director's Note</div>
         <div class="note-sublabel" id="note-sublabel">Three things worth hearing.</div>
         <ul class="directors-note-list" id="r-director"></ul>
@@ -380,7 +490,13 @@
 
       <!-- LENS FILTERS -->
       <div class="lens-block" id="lens-block">
-        <div class="lens-label">Change the Lens</div>
+        <div class="lens-header">
+          <span class="lens-label">Change the Lens</span>
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon" onclick="toggleTooltip('lens-tooltip')">i</span>
+            <div class="tooltip-bubble" id="lens-tooltip">The same entry, seen through six different perspectives. Each lens changes only the Director's Note and Hidden Opportunity. Your scene stays the same. Tap any lens to re-read your entry differently.</div>
+          </div>
+        </div>
         <div class="lens-sublabel">The same scene, seen differently.</div>
         <div class="lens-grid">
           <button class="lens-btn" data-lens="close-up" onclick="applyLens('close-up', this)">
@@ -416,9 +532,15 @@
       </div>
 
       <div class="reflection-block">
-        <div class="reflection-label">Your Reflection</div>
-        <div class="reflection-sublabel">What does this scene bring up for you? This is yours alone.</div>
-        <textarea class="reflection-textarea" id="reflection-input" placeholder="Write back to your scene..." rows="4" oninput="onReflectionInput()"></textarea>
+        <div class="reflection-header">
+          <span class="reflection-label">Your Reflection</span>
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon" onclick="toggleTooltip('reflection-tooltip')">i</span>
+            <div class="tooltip-bubble" id="reflection-tooltip">This is private and just for you. No one else sees it, and there's no response coming. Write back to your scene, or don't. It's entirely yours.</div>
+          </div>
+        </div>
+        <div class="reflection-sublabel">Write back to your scene. This is private. Just for you, no response coming.</div>
+        <textarea class="reflection-textarea" id="reflection-input" placeholder="What does this scene bring up for you?" rows="4" oninput="onReflectionInput()"></textarea>
         <button class="reflection-save-btn" onclick="saveReflection()">Save reflection</button>
         <div class="reflection-saved" id="reflection-saved">✓ Saved to your reel</div>
       </div>
@@ -456,7 +578,7 @@ let isSpeaking = false;
 let currentAudio = null;
 let speechSynth = window.speechSynthesis;
 
-// Lens state — live only, never saved to DB
+// Lens state
 let originalDirectorsNote = null;
 let originalOpportunity = null;
 let activeLens = null;
@@ -488,6 +610,13 @@ const LENS_NAMES = {
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-AU', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  // Close tooltips when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('tooltip-icon')) {
+      document.querySelectorAll('.tooltip-bubble').forEach(t => t.classList.remove('visible'));
+    }
   });
 
   const hashParams = new URLSearchParams(window.location.hash.replace('#', ''));
@@ -533,6 +662,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ─────────────────────────────────────────────
+// TOOLTIP
+// ─────────────────────────────────────────────
+function toggleTooltip(id) {
+  const bubble = document.getElementById(id);
+  const isVisible = bubble.classList.contains('visible');
+  document.querySelectorAll('.tooltip-bubble').forEach(t => t.classList.remove('visible'));
+  if (!isVisible) bubble.classList.add('visible');
+}
+
+// ─────────────────────────────────────────────
+// ONBOARDING HINT
+// ─────────────────────────────────────────────
+function updateOnboardingHint() {
+  const hint = document.getElementById('onboarding-hint');
+  if (entries.length < 3) {
+    hint.classList.add('visible');
+  } else {
+    hint.classList.remove('visible');
+  }
+}
+
+// ─────────────────────────────────────────────
 // SESSION
 // ─────────────────────────────────────────────
 function saveSession(s) { session = s; localStorage.setItem('tp_session', JSON.stringify(s)); }
@@ -545,7 +696,7 @@ async function onSignedIn() {
   document.getElementById('guest-notice').classList.remove('visible');
   guestMode = false; localStorage.removeItem('tp_guest');
   await loadEntriesFromDB();
-  renderReel(); updateSceneLabel();
+  renderReel(); updateSceneLabel(); updateOnboardingHint();
 }
 
 function signOut() {
@@ -557,7 +708,7 @@ function signOut() {
   showAuthStep('email');
   document.getElementById('guest-notice').classList.remove('visible');
   document.getElementById('scene-card').classList.remove('visible');
-  renderReel(); updateSceneLabel();
+  renderReel(); updateSceneLabel(); updateOnboardingHint();
 }
 
 // ─────────────────────────────────────────────
@@ -568,7 +719,7 @@ function enableGuestMode() {
   document.getElementById('auth-section').classList.add('hidden');
   document.getElementById('guest-notice').classList.add('visible');
   entries = JSON.parse(localStorage.getItem('tp_entries') || '[]');
-  renderReel(); updateSceneLabel();
+  renderReel(); updateSceneLabel(); updateOnboardingHint();
 }
 
 function showAuthSection() {
@@ -634,7 +785,7 @@ function showAuthStatus(type, msg) {
 }
 
 // ─────────────────────────────────────────────
-// ENTRIES — DB & LOCAL
+// ENTRIES: DB & LOCAL
 // ─────────────────────────────────────────────
 async function loadEntriesFromDB() {
   if (!session?.access_token) return;
@@ -685,7 +836,7 @@ async function updateReflectionInDB(dbId, reflection) {
 function updateCharCount() {
   const val = document.getElementById('journal-input').value.length;
   const el = document.getElementById('char-count');
-  if (val > 0 && val < MIN_CHARS) { el.textContent = val + ' / 2000 — keep writing...'; el.classList.add('too-short'); }
+  if (val > 0 && val < MIN_CHARS) { el.textContent = val + ' / 2000: keep writing...'; el.classList.add('too-short'); }
   else { el.textContent = val + ' / 2000'; el.classList.remove('too-short'); }
 }
 
@@ -715,7 +866,7 @@ async function rollCamera() {
   const text = document.getElementById('journal-input').value.trim();
   if (!text || text.length < MIN_CHARS) {
     const el = document.getElementById('char-count');
-    el.textContent = text.length + ' / 2000 — keep writing...'; el.classList.add('too-short'); return;
+    el.textContent = text.length + ' / 2000: keep writing...'; el.classList.add('too-short'); return;
   }
 
   if (checkForCrisis(text)) { const proceed = await showCrisisCard(); if (!proceed) return; }
@@ -730,7 +881,7 @@ async function rollCamera() {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text })
     });
-    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Something went wrong — please try again.'); }
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Something went wrong. Please try again.'); }
     const result = await res.json();
 
     const entry = {
@@ -753,7 +904,7 @@ async function rollCamera() {
 
     showScene(entry); renderReel();
     document.getElementById('journal-input').value = '';
-    updateCharCount(); updateSceneLabel();
+    updateCharCount(); updateSceneLabel(); updateOnboardingHint();
 
   } catch (err) {
     document.getElementById('error-msg').textContent = err.message;
@@ -788,19 +939,28 @@ async function applyLens(lens, btnEl) {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: currentEntry.inputText, lens })
     });
-    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Lens failed — try again.'); }
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Lens failed. Try again.'); }
     const result = await res.json();
 
     const notes = Array.isArray(result.directors_note) ? result.directors_note : (result.directors_note || '').split(/(?<=[.!?])\s+/).filter(s => s.trim());
     document.getElementById('r-director').innerHTML = notes.map(n => `<li>${n}</li>`).join('');
     document.getElementById('r-opportunity').textContent = result.opportunity || '';
-    document.getElementById('note-sublabel').textContent = LENS_NAMES[lens] + ' — ' + btnEl.querySelector('.lens-btn-desc').textContent;
+    document.getElementById('note-sublabel').textContent = LENS_NAMES[lens] + ': ' + btnEl.querySelector('.lens-btn-desc').textContent;
     document.getElementById('lens-reset-btn').classList.add('visible');
+
+    // Scroll up to show the updated Director's Note
+    setTimeout(() => {
+      document.getElementById('directors-note-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 
   } catch (err) {
     btnEl.classList.remove('active'); activeLens = null;
-    if (originalDirectorsNote !== null) { renderNoteFromOriginals(); document.getElementById('note-sublabel').textContent = 'Three things worth hearing.'; originalDirectorsNote = null; originalOpportunity = null; }
-    document.getElementById('lens-loading-text').textContent = err.message || 'Lens failed — try again.';
+    if (originalDirectorsNote !== null) {
+      renderNoteFromOriginals();
+      document.getElementById('note-sublabel').textContent = 'Three things worth hearing.';
+      originalDirectorsNote = null; originalOpportunity = null;
+    }
+    document.getElementById('lens-loading-text').textContent = err.message || 'Lens failed. Try again.';
     setTimeout(() => { document.getElementById('lens-loading-text').textContent = 'Changing the lens...'; }, 2500);
   } finally {
     document.getElementById('lens-loading').classList.remove('visible');
